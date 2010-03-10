@@ -1,0 +1,47 @@
+<%if admin?%>
+<% form_for :photo do |f| %>
+<h1><%=f.text_field :title%></h1>
+<div class="streamitem">
+	<div class="date"><%=reldate @photo.created_at%></div>
+	<%if @photo.status >= 5%>
+	<div class="rating">
+		<div id="star-ratings-block<%=@photo.id%>">
+	    	<%= render :partial => "ratings/rate", :locals => { :photo => @photo } %>
+		</div>
+	</div>
+	<%else%>
+	<div class="rating">
+		Photo has not been approved yet
+	</div>
+	<%end%>
+	<div class="photo"><%= image_tag(@photo.public_filename) %></div>
+	<div class="photodesc"><%= f.text_area :description%></div>
+	<div class="comcount">Comments: <%=@comments.count%></div>
+	<div class="userinfo">
+		Anonymous? <%=f.check_box :anony%><br/>
+		<%if @photo.anony == true %>
+			Uploaded by: Anonymous Coward
+		<%else%>
+			Uploaded by: <%= link_to @user.login, :controller => 'users', :action => 'profile', :id => @user.id%>
+		<%end%>
+	</div>
+	<%= submit_tag 'Save!', :class => 'submit' %>
+	<%end%>
+	<div id="comments">
+		<h3>Comments</h3>
+		<% for comment in @comments do%>
+			<div class="coitem"><%=comment.data%><div>
+			<div class="coitem">By: <%=comment.user.login%></div>
+		<%end%>
+		<% form_for :comment do |f|%>
+		<p><label for="data">Leave a Comment:</label><br/>
+		<%= f.text_area :data, :size => '70x5' %></p>
+		<p><%= submit_tag 'Comment' %></p>
+		<%end%>
+	</div>
+	
+		
+</div>
+<%else%>
+I'm sorry, only admins can edit photos
+<%end%>

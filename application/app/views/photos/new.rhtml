@@ -1,0 +1,33 @@
+<h1>Upload your douche photo!</h1>
+
+<%= error_messages_for :photo %>
+<div id="form">
+<% form_for(:photo, :url => {:action => 'create'}, :html => { :multipart => true }) do |f| %>
+<table width="100%">
+  	<tr>
+		<td>Image: </td>
+		<td><%= f.file_field :uploaded_data %></td>
+	</tr>
+	<tr>
+		<td>Photo Title: </td>
+		<td><%= f.text_field :title %></td>
+	</tr>
+	<tr>
+		<td valign="top">Description: </td>
+		<td><%= f.text_area :description %></td>
+	</tr>
+	<tr>
+		<td valign="top"><%= f.check_box :terms_acceptence %></td>
+		<td><-- I certify that I have the rights to syndicate this photo on the internet [?]</td>
+	</tr>
+	<tr>
+		<td valign="top"><%= f.check_box :anony %></td>
+		<td><-- I would like this photo to be posted anonymously [?]</td>
+	</tr>
+	<tr>
+		<td><%= submit_tag 'Upload a Douche', :class => 'submit' %></td>
+		<td></td>
+	</tr>
+</table>
+<% end %>
+</div>

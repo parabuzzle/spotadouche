@@ -1,0 +1,15 @@
+<%= error_messages_for :user %>
+<% form_for :user do |f| -%>
+
+<p><label for="email">Email:</label>
+<%= f.text_field :email %></p>
+<% form_for :pref do |p|%>
+<p><label for="default_annonimize">Make my posts anonymous by default:</label>
+<%= p.check_box :default_annonimize %></p>
+<p><label for="daily_douche">I would like to receive the Daily Douche News:</label>
+<%= p.check_box :daily_douche %></p>
+<p><label for="about">About Me:</label>
+<%= p.text_area :about %></p>
+<p><%= submit_tag 'Save' %></p>
+<% end -%>
+<%end%>

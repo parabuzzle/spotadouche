@@ -1,0 +1,8 @@
+<h1>Admin Dashboard</h1>
+
+<div id="admincounts">
+	<div class="item"><%= link_to @pending.length, :action => 'pending' %> pending photo(s) for review [<%= link_to "Review", :action => "pending"%>]</div>
+	<div class="item"><%=@ucount%> users in the database [<%=link_to "View", :action => "users" %>]</div>
+        <div class="item"><%=@active.length%> active photos</div>
+        <div class="item"><%=@deleted.length%> deleted photos</div>
+</div>

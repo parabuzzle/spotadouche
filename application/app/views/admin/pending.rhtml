@@ -1,0 +1,19 @@
+<h1>Pending Photos</h1>
+<%for photo in @pending%>
+	<div class="streamitem">
+		<div class="date"><%=photo.created_at.to_s(:pretty)%></div>
+		<div class="phototitle"><%=h photo.title%></div>
+		<div class="photo"><%= image_tag(photo.public_filename) %></div>
+		<div class="photodesc"><%=h photo.description%></div>
+		<div class="comcount">Comments: <%=photo.comments.count%></div>
+		<div class="userinfo">
+			<%if photo.anony == true %>
+				Uploaded by: <%= link_to photo.user.login, :controller => 'users', :action => 'profile', :id => photo.user.id%> (Will be Anonymous Coward)
+			<%else%>
+				Uploaded by: <%= link_to photo.user.login, :controller => 'users', :action => 'profile', :id => photo.user.id%>
+			<%end%>
+		</div>
+		<%=link_to 'Approve', {:action => 'updatestatus', :status => 5, :id => photo.id}, :method => 'post'%> | <%=link_to 'Reject', {:action =>'updatestatus', :status => 2, :id => photo.id}, :method => 'post'%>
+	</div>
+	---
+<% end %>

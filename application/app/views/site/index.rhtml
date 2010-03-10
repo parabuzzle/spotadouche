@@ -1,0 +1,24 @@
+<h1>Latest Douche Spottings</h1>
+<%for photo in @photos%>
+	<div class="streamitem">
+		<div class="date">Uploaded <%=reldate photo.created_at%></div>
+		<div class="rating">
+			<div id="star-ratings-block<%=photo.id%>">
+		    	<%= render :partial => "ratings/rate", :locals => { :photo => photo } %>
+			</div>
+		</div>
+		<div class="phototitle"><%=h photo.title%></div>
+		<div class="photo"><%= image_tag(photo.public_filename) %></div>
+		<div class="photodesc"><%=h photo.description%></div>
+		<div class="comcount">Comments: <%=link_to photo.comments.count, :controller => 'photos', :action => 'show', :id => photo.id%></div>
+		<div class="userinfo">
+			<%if photo.anony == true %>
+				Uploaded by: Anonymous Coward
+			<%else%>
+				Uploaded by: <%= link_to photo.user.login, :controller => 'users', :action => 'profile', :id => photo.user.id%>
+			<%end%>
+		</div>
+	</div>
+	---
+<% end %>
+<%= will_paginate @photos %>

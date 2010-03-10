@@ -1,0 +1,11 @@
+*.log
+*.sqlite3
+config/database.yml
+config/facebooker.yml
+config/amazon_s3.yml
+config/ferret_server.yml
+db/schema.rb
+public/photo_thumbs
+public/photos
+tmp/*
+index/*

@@ -1,0 +1,232 @@
+/*Main Global CSS*/
+
+body {
+	color: #000;
+	margin: 0px; 
+	padding: 0px;
+	color: #333;
+	font-weight:bold;
+	font-family: serif;
+}
+
+a {
+	text-decoration: none;
+	color: #660033;
+}
+
+a:hover {
+	text-decoration: none;
+	color: #333;
+}
+
+img {
+	border: 0px;
+}
+
+.small {
+	font-size: 10px;
+}
+.medium {
+	font-size: 14px;
+}
+
+
+#dashavatar {
+}
+#main {
+	background: #fff;
+	width:980px;
+	margin:auto;
+}
+
+#loginbox {
+	float:right;
+	padding: 12px;
+	padding-right: 45px;
+	text-align: right;
+}
+
+#hloblk {
+	border: 0px;
+	padding: 2px;
+}
+
+#navigation {
+	float:left;
+	padding: 10px;
+}
+
+#adminnav {
+	text-align: right;
+}
+
+#header {
+	width: 100%;
+	margin: 0px;
+	height: 295px;
+	background-image:url('/images/douchehead.jpg');
+	border-bottom: solid 4px #000;
+	color:#fff;
+}
+
+#header a, #header a:hover {
+	color:#fff;
+}
+
+#loginblk {
+	text-align: right;
+	width: 250px;
+}
+
+#logo {
+	position: absolute;
+	padding-top: 20px;
+	padding-left: 45px;
+	font-weight:bold;
+	font-size: 55px;
+	color: #fff;
+}
+
+
+#container {
+	margin: 20px;
+}
+
+#rightnav {
+	text-align:right;
+	padding: 4px;
+	width: 250px;
+	float:right;
+	background: #eee;
+	border: 1px solid #000;
+	border-top: 0px;
+}
+
+#content {
+	width:670px;
+	min-height: 500px;
+	_height: 500px;
+}
+
+#footer {
+	padding: 10px;
+	margin-top: 5px;
+	border-top: 2px solid #000;
+}
+
+#footlinks {
+	float:left;
+	text-align: left;
+}
+
+#copyright {
+	font-size: 12px;
+	float:right;
+	text-align: right;
+}
+
+#notice {
+	padding: 10px;
+	background: #3CF;
+	border: 1px solid #000;
+}
+
+#error {
+	padding: 10px;
+	background: red;
+	border: 1px solid #000;
+}
+
+#form {
+	width: 350px;
+}
+
+
+
+.clear {
+	clear:both;
+}
+
+.errorExplanation {
+	width: 800px;
+	margin: auto;
+	padding: 3px;
+	padding-left: 10px;
+	padding-right: 10px;
+	background: #ffff55;
+	border: 1px solid #333;
+	margin-bottom: 10px;
+}
+
+/*             styles for the star rater                */    
+.star-rating{
+    list-style:none;
+    margin: 0px;
+    padding:0px;
+    width: 150px;
+    height: 30px;
+    position: relative;
+    background: url(/images/star_rating.gif) top left repeat-x;        
+}
+.star-rating li{
+    padding:0px;
+    margin:0px;
+    /*\*/
+    float: left;
+    /* */
+}
+.star-rating li a{
+    display:block;
+    width:30px;
+    height: 30px;
+    text-decoration: none;
+    text-indent: -9000px;
+    z-index: 20;
+    position: absolute;
+    padding: 0px;
+}
+.star-rating li a:hover{
+    background: url(/images/star_rating.gif) left center;
+    z-index: 2;
+    left: 0px;
+    border:none;
+}
+.star-rating a.one-star{
+    left: 0px;
+}
+.star-rating a.one-star:hover{
+    width:30px;
+}
+.star-rating a.two-stars{
+    left:30px;
+}
+.star-rating a.two-stars:hover{
+    width: 60px;
+}
+.star-rating a.three-stars{
+    left: 60px;
+}
+.star-rating a.three-stars:hover{
+    width: 90px;
+}
+.star-rating a.four-stars{
+    left: 90px;
+}    
+.star-rating a.four-stars:hover{
+    width: 120px;
+}
+.star-rating a.five-stars{
+    left: 120px;
+}
+.star-rating a.five-stars:hover{
+    width: 150px;
+}
+.star-rating li.current-rating{
+    background: url(/images/star_rating.gif) left bottom;
+    position: absolute;
+    height: 30px;
+    display: block;
+    text-indent: -9000px;
+    z-index: 1;
+}
+

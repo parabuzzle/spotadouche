@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>Spot a Douche :: Under Development</title>
+<!--Javascript from github.com -->
+<script type="text/javascript">
+  window.onload = function() {
+    var videoIds = [
+      'gw1g2yKxb0I', // Tiddy Bear
+      'dMH0bHeiRNg', // Evolution of Dance
+      'N90h5f9Ulnk', // Top 5 metalocalypse
+      'i4U33U_UyzQ', // Norway Black Metal part 1
+      'N-2C2gb6ws8', // Vista Fail!
+      'by8oyJztzwo', // canon rock
+      'oehUnEw7ZMs', // Pissed off Teacher
+      'O9mEKMz2Pvo', // while my guitar gently weeps
+      'n1YE8Wwo2rs', // thunderhorse
+      'Xip43vYpn9o', // dethklok
+      'Yu_moia-oVI', // rickroll
+      'R706isyDrqI', // 1984
+      '2C8XatA9wMI', // computer commercial
+      'KMU0tzLwhbE', // developers developers developers
+      'z3JaIOe2LU8', // devil makes three
+      '2AWCRkcCKm8', // two gallants
+      'yYp2Aloz-uE', // soulja boy
+      'e-yldqNkGfo', // food fight
+      'DDg7kWgs5e0', // dancing walrus
+      'PmZyB_ghpa0', // flying dude
+      'SCplsXu1HRk', // slash
+      '87Iz3RHZNDQ', // jason becker
+      'YZ7wyXCktS8', // store wars
+      'cMV_gvBwL1g', // basketball shot
+      'JvltzwkUEEA', // mantage
+      'ueJeC2pxxbM', // airbus
+      'psaaqDKo-yk', // office pranks
+      '5blbv4WFriM', // darth vader
+      'UT2yDT7uqvY', // scary computer
+      'pcJwz7wu8_s', // tenacious d
+      '4bekQU9l8hk', // tetris
+      'DSlR90VEKlY', // john petrucci
+      'uAxG3lgRKUU', // best buy
+      'l7Z818lnTK0', // coke bomb
+      'LB6SBC3dm7U'  // Failures
+    ]
+    var randomId = videoIds[Math.ceil(Math.random() * videoIds.length)]
+    var videoURL = 'http://youtube.com/v/' + randomId + '&autoplay=1'
+    var embed = '<object id="video" width="400" height="325"><param name="movie" value="'+ videoURL + '"></param><param name="wmode" value="transparent"></param><embed src="' + videoURL + '" type="application/x-shockwave-flash" wmode="transparent" width="400" height="325"></embed></object>'
+    document.getElementById('video').innerHTML = embed
+  }
+</script>
+
+<body bgcolor="#00000">
+<br /><br/><br/><br/>
+<div id="hello" style="padding:20px;marins:auto;text-align:center;color:#fff;font-weight:bold;">Nothing to see here. Move along.
+</body>
+</html>
+
+

@@ -1,0 +1,135 @@
+<%starttime = Time.now.to_f %>
+<!DOCTYPE HTML PUBLIC "!//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title><%= @title %></title>
+    <%= stylesheet_link_tag "main" %>
+    <%= javascript_include_tag 'jquery.min'%>
+	<%= javascript_include_tag 'application' %>
+	<%= javascript_include_tag 'prototype'%>
+	
+	<!-- Load Facebook javascript -->
+	<!-- <%= facebook_connect_javascript %>
+	<%= facebook_connect_init %> -->
+	
+  </head>
+  
+  <body>
+	<div id ="main">
+	<div id="header">
+
+		<!--<div id="logo"><%=link_to image_tag('douchesquare75.jpg'), :controller => 'site', :action => 'index' %> Spot a Douche</div>
+		
+		<div id="loginbox">
+			<div id="fbconnect">
+				<% unless logged_in?%>
+				<%=link_to"Login", :controller => 'users', :action => 'login'%> | <%= link_to"Register", :controller => 'users', :action => 'signup'%>
+				<%else%>
+				<%=link_to "Logout", :controller => 'users', :action => 'logout'%>
+				<%end%>
+			</div>
+			<% if logged_in? %>
+			<div id="hloblk">
+					Welcome Back <%= user?.login%>
+				
+			</div>
+			<%end%>
+			<div class="clear"></div>
+		</div>-->
+	</div><!-- header -->
+	<div class="clear"></div>
+	<div id="rightnav">
+		<div id="loginblk">
+			<% if logged_in? %>
+			<div id="hloblk">
+					Welcome Back <%= user?.login%>
+			</div>
+			<%end%>
+			<div id="adminnav">
+			<%if logged_in?%>
+			<%=link_to "My Settings", :controller => 'users', :action => 'index'%> 
+			<%if admin?%>
+			 	<br/><%=link_to "Admin Console", :controller => 'admin', :action => 'index'%>
+			<%end%>
+			<%end%>
+			</div><!-- adminnav -->
+			<% unless logged_in?%>
+			<%=link_to"Login", :controller => 'users', :action => 'login'%> | <%= link_to"Register", :controller => 'users', :action => 'signup'%>
+			<%else%>
+			<%=link_to "Logout", :controller => 'users', :action => 'logout'%>
+			<%end%>
+
+		</div>
+		<h2>Navigation</h2>
+		<div class="link"><%=link_to "Home", :controller => 'site', :action => 'index'%></div>
+		<div class="link"><%=link_to "Upload", :controller => 'photos', :action => 'new'%></div>
+	</div>
+	<div id="container">	
+		<div id="content">
+			<% if flash[:notice] %>
+			   <div id="notice"><%= flash[:notice] %></div>
+			<% end %>
+			<% if flash[:error] %>
+			    <div id="error"><%= flash[:error] %></div>
+			<% end %>
+			<%= @content_for_layout %>
+		</div><!-- content -->
+		
+		<div id="footer">
+			<div id="footlinks">blog | terms of service | privacy policy</div>
+			<div id="copyright">Copyright &copy; 2009 by MadHatter Multimedia</div>
+			<div class="clear"></div>
+		</div><!-- footer -->
+		
+	</div> <!-- container-->
+    
+    <% if ENV["RAILS_ENV"] == "development"%>
+    <!-- Dev stuff (outside container) -->
+    <div id="debug">
+		<a href='#' onclick="$('#params_debug_info').toggle();return false;">params</a> |
+		<a href='#' onclick="$('#session_debug_info').toggle();return false;">session</a> |
+		<a href='#' onclick="$('#env_debug_info').toggle();return false;">env</a> |
+		<a href='#' onclick="$('#request_debug_info').toggle();return false;">request</a>    
+      <fieldset id="params_debug_info" class="debug_info" style="display:none;">
+        <legend>params</legend>
+        <%= debug(params) %>
+      </fieldset>
+      <fieldset id="session_debug_info" class="debug_info" style="display:none;">
+        <legend>session</legend>
+        <%= debug(session) %>
+      </fieldset>
+       <fieldset id="env_debug_info" class="debug_info" style="display:none;">
+        <legend>env</legend>
+        <%= debug(request.env) %>
+      </fieldset>
+      <fieldset id="request_debug_info" class="debug_info" style="display:none;">
+        <legend>request</legend>
+        <%= debug(request) %>
+      </fieldset>
+    </div>
+    <!-- end Dev mode only stuff -->
+    <% end %>
+	
+	<!-- Analytics -->
+	<% if ENV["RAILS_ENV"] == "production"%>
+		<script type="text/javascript">
+		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+		<script type="text/javascript">
+		try {
+		var pageTracker = _gat._getTracker("UA-11937046-1");
+		pageTracker._setDomainName(".spotadouche.com");
+		pageTracker._trackPageview();
+		} catch(err) {}</script>
+	<%end%>
+	</div>
+  </body>
+</html>
+<% rtime = Time.now.to_f - starttime%>
+ 
+<% if ENV["RAILS_ENV"] == "development"%>
+<%= [rtime*1000].to_s.to_i %> ms
+<%else%>
+<!-- <%= rtime*1000 %> -->
+<%end%>
