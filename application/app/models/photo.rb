@@ -2,6 +2,8 @@ class Photo < ActiveRecord::Base
   belongs_to :user
   has_many :comments
   
+  attr_accessor :forceup
+  
   acts_as_rated :with_stats_table => true
   acts_as_ferret :fields => [ :title, :description ]  
   
@@ -15,6 +17,13 @@ class Photo < ActiveRecord::Base
                  :processor => 'Rmagick'
 
   validates_as_attachment
+  validate :terms_accepted
+  
+  def terms_accepted
+    if terms_acceptence != true
+      unless forceup == 'true' then errors.add_to_base("You must accept the terms to upload your photo") end
+    end
+  end
   
   # Status map
   

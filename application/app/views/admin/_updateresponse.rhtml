@@ -1,0 +1,12 @@
+<% if flash[:error].nil? %>
+	<% if params[:status].to_i >= 5%>
+		Photo is now live!
+	<%else%>
+		Photo has been deleted
+	<%end%>
+<%else%>
+	<%=flash[:error]%>
+	<%flash[:error]=nil%>
+	<br/>
+	<%=link_to_remote 'Force Delete', {:url => {:action =>'updatestatus', :controller => "admin", :status => 2, :forceup => true, :id => photo.id}}, :name => "force", :confirm => "Are you sure you want to force this change to the system?"%>
+<%end%>

@@ -13,7 +13,9 @@
 				Uploaded by: <%= link_to photo.user.login, :controller => 'users', :action => 'profile', :id => photo.user.id%>
 			<%end%>
 		</div>
-		<%=link_to 'Approve', {:action => 'updatestatus', :status => 5, :id => photo.id}, :method => 'post'%> | <%=link_to 'Reject', {:action =>'updatestatus', :status => 2, :id => photo.id}, :method => 'post'%>
+		<div id="status-block-<%=photo.id%>"><%= render :partial => "admin/statusupdate", :locals => { :photo => photo} %></div>
 	</div>
 	---
-<% end %>
+<% end %> 
+
+<%= will_paginate @pending %>

@@ -1,6 +1,7 @@
 class PhotosController < ApplicationController
   include ApplicationHelper
-  before_filter :protect, :only =>[:new, :create]
+  before_filter :protect, :only =>[:new, :create, :edit]
+  before_filter :protect_sensitive, :only =>[:edit]
   
   def new
     @title = "Spot a Douche - Upload your image"
@@ -10,7 +11,8 @@ class PhotosController < ApplicationController
   
   def edit
     @photo = Photo.find(params[:id])
-    @comments = @photo.comments
+    unless params[:pp] then @@defaultpp = 10 else pp = params[:pp] end
+    @comments = @photo.comments.paginate :page => params[:page], :order => 'created_at DESC', :per_page => pp
     @user = @photo.user
     @title = "Spot a Douche - #{@photo.title}"
     if request.post?
@@ -20,14 +22,10 @@ class PhotosController < ApplicationController
   end
   def show
     @photo = Photo.find(params[:id])
-    @comments = @photo.comments
     @user = @photo.user
+    unless params[:pp] then @@defaultpp = 10 else pp = params[:pp] end
+    @comments = @photo.comments.paginate :page => params[:page], :order => 'created_at DESC', :per_page => pp
     @title = "Spot a Douche - #{@photo.title}"
-    if request.post?
-      c = @photo.comments.new(params[:comment])
-      c.user_id = @user.id
-      c.save
-    end
   end
   
   def create
@@ -44,14 +42,17 @@ class PhotosController < ApplicationController
   
   private
   
-  def protect
-    unless logged_in?
+  def protect_sensitive
+    user = User.find(session[:user])
+    photo = Photo.find(params[:id])
+    if user.id == photo.user_id || user.admin
+      return true
+    else
       session[:protected_page] = request.request_uri
-      flash[:notice] = "i can't do that dave... you must be logged in first"
+      flash[:notice] = "i can't do that dave... you can only edit your own stuff"
       redirect_to :controller => "site", :action => "index"
       return false
     end
   end
-  
   
 end

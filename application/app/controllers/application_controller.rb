@@ -4,6 +4,7 @@
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
+  # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
   #Make a tracking cookie
   before_filter :ensure_tracking_cookie
@@ -31,7 +32,14 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  
+  def protect
+    unless logged_in?
+      session[:protected_page] = request.request_uri
+      flash[:notice] = "i can't do that dave... you must be logged in first"
+      redirect_to :controller => "site", :action => "index"
+      return false
+    end
+  end
   # redirects in the typical case
   #before_filter :ensure_authenticated_to_facebook
   

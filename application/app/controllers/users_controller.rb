@@ -1,10 +1,6 @@
 class UsersController < ApplicationController
-  # Be sure to include AuthenticationSystem in Application Controller instead
-  include AuthenticatedSystem
-  # If you want "remember me" functionality, add this before_filter to Application Controller
-  before_filter :login_from_cookie
-  
-  before_filter :protect, :only =>[:index]
+  before_filter :protect_sensitive, :only => [:edit]
+  before_filter :protect, :only =>[:index, :edit]
   # say something nice, you goof!  something sweet.
   def index
     @title="Spot a Douche - User Dashboard"
@@ -12,6 +8,14 @@ class UsersController < ApplicationController
     @prefs = @user.pref
     redirect_to(:action => 'signup') unless logged_in? || User.count > 0
   end
+
+  def profile
+    @user = User.find_by_login(params[:login])
+    @photos = Photo.find(:all, :conditions => "user_id = #{@user.id} and anony != 1")
+    @live = Photo.find(:all, :conditions => "user_id = #{@user.id} and anony != 1 and status >= 5")
+    @title="Spot a Douche - #{@user.login}'s Profile"
+  end
+
 
   def login
     @title="Spot a Douche - Login"
@@ -41,11 +45,13 @@ class UsersController < ApplicationController
   
   def edit
     @title="Spot a Douche - Edit"
-    @user = User.find(session[:user])
+    if params[:id].nil? then params[:id] = session[:user] end
+    id = params[:id]
+    @user = User.find(id)
     @pref = @user.pref
     return unless request.post?
-    @user.update_attributes(params[:user])
-    @pref.update_attributes(params[:pref])
+    @user.update_attributes(id)
+    @pref.update_attributes(id)
     self.current_user = @user
     redirect_back_or_default(:controller => '/users', :action => 'index')
     flash[:notice] = "Updated User Settings"
@@ -74,15 +80,19 @@ class UsersController < ApplicationController
     redirect_back_or_default(:controller => 'site', :action => 'index')
   end
   
-  private
+  private 
   
-  def protect
-    unless logged_in?
+  def protect_sensitive
+    user = User.find(session[:user])
+    if user.id == params[:id].to_i || user.admin
+      return true
+    else
       session[:protected_page] = request.request_uri
-      flash[:notice] = "i can't do that dave... you must be logged in first"
+      flash[:notice] = "i can't do that dave... you can only edit your own stuff"
       redirect_to :controller => "site", :action => "index"
       return false
     end
   end
+  
   
 end

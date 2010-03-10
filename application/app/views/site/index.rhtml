@@ -11,6 +11,7 @@
 		<div class="photo"><%= image_tag(photo.public_filename) %></div>
 		<div class="photodesc"><%=h photo.description%></div>
 		<div class="comcount">Comments: <%=link_to photo.comments.count, :controller => 'photos', :action => 'show', :id => photo.id%></div>
+		<div class="loc">Location: <%if photo.location.nil?%>Unknown<%else%><%=photo.location%><%end%></div>
 		<div class="userinfo">
 			<%if photo.anony == true %>
 				Uploaded by: Anonymous Coward
@@ -18,6 +19,10 @@
 				Uploaded by: <%= link_to photo.user.login, :controller => 'users', :action => 'profile', :id => photo.user.id%>
 			<%end%>
 		</div>
+		<% if logged_in? and admin? %>
+		<div id="admindata">ip - <%=photo.ip%>
+			<div id="status-block-<%=photo.id%>"><%= render :partial => "admin/statusupdate", :locals => { :photo => photo} %></div>
+		<%end%>
 	</div>
 	---
 <% end %>

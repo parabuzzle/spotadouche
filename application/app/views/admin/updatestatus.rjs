@@ -1,0 +1,1 @@
+page.replace_html "status-block-#{@photo.id}", :partial => 'admin/updateresponse', :locals => {:photo => @photo}

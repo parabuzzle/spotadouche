@@ -1,0 +1,5 @@
+<% form_for :comment  do |f|%>
+<p><label for="data">Leave a Comment:</label><br/>
+<%= f.text_area :data, :size => '70x5' %></p>
+<p><%= submit_tag 'Comment' %></p>
+<%end%>

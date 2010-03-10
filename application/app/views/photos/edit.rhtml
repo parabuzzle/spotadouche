@@ -16,7 +16,7 @@
 	<%end%>
 	<div class="photo"><%= image_tag(@photo.public_filename) %></div>
 	<div class="photodesc"><%= f.text_area :description%></div>
-	<div class="comcount">Comments: <%=@comments.count%></div>
+	<div class="comcount">Comments: <%=@comments.length%></div>
 	<div class="userinfo">
 		Anonymous? <%=f.check_box :anony%><br/>
 		<%if @photo.anony == true %>
@@ -26,6 +26,10 @@
 		<%end%>
 	</div>
 	<%= submit_tag 'Save!', :class => 'submit' %>
+	<%end%>
+	<% if logged_in? and admin? %>
+	<div id="admindata">ip - <%=@photo.ip%>
+		<div id="status-block-<%=@photo.id%>"><%= render :partial => "admin/statusupdate", :locals => { :photo => @photo} %></div>
 	<%end%>
 	<div id="comments">
 		<h3>Comments</h3>

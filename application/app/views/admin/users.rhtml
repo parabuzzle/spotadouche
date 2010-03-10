@@ -5,7 +5,18 @@
 		<div class="avatar"><%=image_tag 'http://www.gravatar.com/avatar/'+Digest::MD5.hexdigest(user.email)+'?s=80'%></div>
 		<div class="username"><%=user.login%></div>
 		<div class="email"><%=user.email%></div>
+		<span class="medium"<%=link_to "Edit", :action => 'edit', :controller => "users", :id => user.id%></span>
+		<div class="flag">
+			<% form_for :user, :url => { :action => "users", :id => user.id } do |f|%>
+			<% fields_for user do |admin| %>
+			<%= admin.check_box :admin%> Admin
+			<%= submit_tag 'Update User' %>
+			<%end%>
+			<%end%>
+		</div>
 	</div>
 	---
 <% end %>
+
+<%= will_paginate @users %>
 

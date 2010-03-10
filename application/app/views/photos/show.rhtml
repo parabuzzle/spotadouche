@@ -14,7 +14,7 @@
 	<%end%>
 	<div class="photo"><%= image_tag(@photo.public_filename) %></div>
 	<div class="photodesc"><%=h @photo.description%></div>
-	<div class="comcount">Comments: <%=@comments.count%></div>
+	<div class="comcount">Comments: <%=@comments.length%></div>
 	<div class="userinfo">
 		<%if @photo.anony == true %>
 			Uploaded by: Anonymous Coward
@@ -28,7 +28,8 @@
 			<div class="coitem"><%=comment.data%><div>
 			<div class="coitem">By: <%=comment.user.login%></div>
 		<%end%>
-		<% form_for :comment do |f|%>
+		<%= will_paginate @comments %>
+		<% form_for :comment, :url => { :action => "new", :controller => "comments", :photoid => @photo.id } do |f|%>
 		<p><label for="data">Leave a Comment:</label><br/>
 		<%= f.text_area :data, :size => '70x5' %></p>
 		<p><%= submit_tag 'Comment' %></p>

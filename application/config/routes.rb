@@ -42,6 +42,9 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'login', :controller => 'users', :action => 'login'
   map.connect 'logout', :controller => 'users', :action => 'logout'
   map.connect 'register', :controller => 'users', :action => 'signup'
+  map.connect 'profile/:login', :controller => "users", :action => "profile"
+  map.connect 'user/edit/:id', :controller => "users", :action => "edit"
+  map.connect 'myprefs', :controller => "users", :action => "index"
   map.connect 'photo/:id', :controller => 'photos', :action => 'show'
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
