@@ -15,9 +15,9 @@ class CreatePhotos < ActiveRecord::Migration
       t.column :rating_type_id, :int
       t.column :admin_notes, :string
       t.column :anony, :boolean, :default => false
-      t.column :location, :string
+      t.column :location, :string, :default => "Unknown"
       t.column :ip, :string
-      t.column :source, :string
+      t.column :source, :string, :default => 'Web'
       t.column :terms_acceptence, :boolean, :default => false
       Photo.generate_ratings_columns t
       t.timestamps

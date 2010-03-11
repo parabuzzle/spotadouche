@@ -7,6 +7,7 @@ class CommentsController < ApplicationController
     @photo = Photo.find(params[:photoid])
     if request.post?
       c = @photo.comments.new(params[:comment])
+      c.ip = request.remote_ip
       c.user_id = session[:user]
       c.save
       redirect_to :action => "show", :controller => 'photos', :id => params[:photoid]

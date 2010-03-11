@@ -8,7 +8,7 @@ class CreateComments < ActiveRecord::Migration
       t.column :deleted, :boolean, :default => false
       t.column :spam_score, :int
       t.column :nspam, :boolean, :default => false
-      t.column :source, :string, :default => 'web'
+      t.column :source, :string, :default => 'Web'
       t.timestamps
     end
   end

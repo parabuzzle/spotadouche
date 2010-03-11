@@ -17,7 +17,26 @@ class Photo < ActiveRecord::Base
                  :processor => 'Rmagick'
 
   validates_as_attachment
+  validates_presence_of :location
+  validates_presence_of :title
+  validates_presence_of :description
   validate :terms_accepted
+  
+  def loc
+    if location.nil? || location.empty?
+      return "Unknown"
+    else
+      return location
+    end
+  end
+  
+  def via
+    if source.nil? || source.empty?
+      return "Web"
+    else
+      return source
+    end
+  end
   
   def terms_accepted
     if terms_acceptence != true

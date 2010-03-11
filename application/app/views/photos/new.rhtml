@@ -9,12 +9,16 @@
 		<td><%= f.file_field :uploaded_data %></td>
 	</tr>
 	<tr>
-		<td>Photo Title: </td>
+		<td>*Photo Title: </td>
 		<td><%= f.text_field :title %></td>
 	</tr>
 	<tr>
-		<td valign="top">Description: </td>
+		<td valign="top">*Description: </td>
 		<td><%= f.text_area :description %></td>
+	</tr>
+	<tr>
+		<td>*Location: </td>
+		<td><%= f.text_field :location, :value => "Unknown"%></td>
 	</tr>
 	<tr>
 		<td valign="top"><%= f.check_box :terms_acceptence %></td>

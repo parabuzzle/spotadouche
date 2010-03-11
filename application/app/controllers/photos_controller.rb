@@ -32,6 +32,7 @@ class PhotosController < ApplicationController
     @title = "Spot a Douche - Upload your image"
     @user = User.find(session[:user])
     @photo = @user.photos.new(params[:photo])
+    @photo.ip = request.remote_ip
     if @photo.save
       flash[:notice] = 'Your douche photo has been submitted. Upon approval your image will be available for the masses'
       redirect_to :controller => 'site', :action => 'index'    

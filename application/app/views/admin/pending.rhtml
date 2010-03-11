@@ -5,7 +5,10 @@
 		<div class="phototitle"><%=h photo.title%></div>
 		<div class="photo"><%= image_tag(photo.public_filename) %></div>
 		<div class="photodesc"><%=h photo.description%></div>
+		<div class="comcount">Location: <%=h photo.loc%></div>
+		<div class="comcount">Source: <%=h photo.via%></div>
 		<div class="comcount">Comments: <%=photo.comments.count%></div>
+		<div class="comcount">ip: <%=photo.ip%></div>
 		<div class="userinfo">
 			<%if photo.anony == true %>
 				Uploaded by: <%= link_to photo.user.login, :controller => 'users', :action => 'profile', :id => photo.user.id%> (Will be Anonymous Coward)
