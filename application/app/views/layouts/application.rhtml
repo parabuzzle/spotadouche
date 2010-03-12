@@ -47,16 +47,26 @@
 			<%= @content_for_layout %>
 		</div><!-- content -->
 		<div id="contentright">
-			ADS!
+			<div id="search">
+				<%form_for :search do |f|%>
+					<%=f.text_field :q, :class=>'searchbox', :size => '15'%>
+					<%= submit_tag 'Search', :class => 'searchbutton' %>
+				<%end%>
+			</div>
+			<div id="rightbox">
+				<div id="rcontent">
+					<div id="socbuttons"><%=image_tag('rss.png')%> <%=image_tag('facebutton.png')%></div>
+				</div>
+			</div>
 		</div><!-- contentright -->
 		<div class="clear"></div>
-		<div id="footer">
-			<div id="footlinks">blog | terms of service | privacy policy</div>
-			<div id="copyright">Copyright &copy; 2009 by MadHatter Multimedia</div>
-			<div class="clear"></div>
-		</div><!-- footer -->
-		
 	</div> <!-- container-->
+	<div id="footer">
+		<div class="hdivf"></div>
+		<div id="footlinks">blog | terms of service | privacy policy</div>
+		<div id="copyright">Copyright &copy; 2009 by MadHatter Multimedia</div>
+		<div class="clear"></div>
+	</div><!-- footer -->
     
     <% if ENV["RAILS_ENV"] == "development"%>
     <!-- Dev stuff (outside container) -->

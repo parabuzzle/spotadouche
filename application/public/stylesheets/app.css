@@ -81,6 +81,50 @@ img {
 	width:300px;
 	float:right;
 }
+#rightbox {
+	background: lightblue;
+	border: 1px solid #aaa;
+	width: 100%;
+	padding-bottom:15px;
+	padding-top:15px;
+}
+#rcontent {
+	padding:6px;
+}
+#socbuttons{
+	text-align:right;
+}
+#search{
+	text-align:right;
+	width:100%;
+	padding-bottom: 20px;
+}
+#footer {
+	border-top:2px solid #fff;
+	margin-top: 20px;
+	padding-bottom:20px;
+}
+
+#copyright {
+	float:right;
+	color:#fff;
+	padding:4px;
+}
+#footlinks {
+	float:left;
+	padding: 4px;
+	color:#fff;
+}
+.searchbox {
+	font-size: 15px;
+	font-weight: bold;
+	vertical-align: middle;
+	height:25px;
+}
+.searchbutton {
+	height:35px;
+	width: 67px;
+}
 .clear {
 	clear:both;
 }
@@ -92,6 +136,8 @@ ul.top {
 	background-image: url(/images/topbar.gif);
 	height: 60px;
 	margin: auto;
+	margin:0px;
+	padding:0px;
 }
 ul.right {
 	list-style-type: none;
