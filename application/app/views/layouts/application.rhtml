@@ -3,7 +3,7 @@
 <html>
   <head>
     <title><%= @title %></title>
-    <%= stylesheet_link_tag "main" %>
+    <%= stylesheet_link_tag "global" %>
 	<%= stylesheet_link_tag "facebox" %>
     <%= javascript_include_tag 'jquery.min'%>
 	<%= javascript_include_tag 'facebox'%>
@@ -17,55 +17,24 @@
   </head>
   
   <body>
+	<div id="topback"></div>
 	<div id ="main">
 	<div id="header">
-
-		<!--<div id="logo"><%=link_to image_tag('douchesquare75.jpg'), :controller => 'site', :action => 'index' %> Spot a Douche</div>
-		
-		<div id="loginbox">
-			<div id="fbconnect">
-				<% unless logged_in?%>
-				<%=link_to"Login", :controller => 'users', :action => 'login'%> | <%= link_to"Register", :controller => 'users', :action => 'signup'%>
-				<%else%>
-				<%=link_to "Logout", :controller => 'users', :action => 'logout'%>
-				<%end%>
-			</div>
-			<% if logged_in? %>
-			<div id="hloblk">
-					Welcome Back <%= user?.login%>
-				
-			</div>
-			<%end%>
-			<div class="clear"></div>
-		</div>-->
+		<div id="logo">
+			[LOGO GOES HERE]
+			<!--<%=link_to image_tag('douchesquare75.jpg'), :controller => 'site', :action => 'index' %> Spot a Douche-->
+		</div> <!-- logo -->
+		<ul class="right">
+		<li class="right"><%=link_to "Signup", {:controller => 'users', :action => 'signup'}, :style=>"background-image:none;"%></li>
+		<li class="right"><%=link_to "Login", :controller => 'users', :action => 'login'%></li>
+		</ul>
+		<ul class="top">
+		<li class="top"><%=link_to "Home", :controller => 'site', :action => 'index'%></li>
+		<li class="top"><%=link_to "Submit", :controller => 'photos', :action => 'new'%></li>
+		<li class="top"><%=link_to "About", {:controller => 'site', :action => 'about'}, :style=>"background-image:none;"%></li>
+		</ul>
 	</div><!-- header -->
 	<div class="clear"></div>
-	<div id="rightnav">
-		<div id="loginblk">
-			<% if logged_in? %>
-			<div id="hloblk">
-					Welcome Back <%= user?.login%>
-			</div>
-			<%end%>
-			<div id="adminnav">
-			<%if logged_in?%>
-			<%=link_to "My Settings", :controller => 'users', :action => 'index'%> 
-			<%if admin?%>
-			 	<br/><%=link_to "Admin Console", :controller => 'admin', :action => 'index'%>
-			<%end%>
-			<%end%>
-			</div><!-- adminnav -->
-			<% unless logged_in?%>
-			<%=link_to"Login", :controller => 'users', :action => 'login'%> | <%= link_to"Register", :controller => 'users', :action => 'signup'%>
-			<%else%>
-			<%=link_to "Logout", :controller => 'users', :action => 'logout'%>
-			<%end%>
-
-		</div>
-		<h2>Navigation</h2>
-		<div class="link"><%=link_to "Home", :controller => 'site', :action => 'index'%></div>
-		<div class="link"><%=link_to "Upload", :controller => 'photos', :action => 'new'%></div>
-	</div>
 	<div id="container">	
 		<div id="content">
 			<% if flash[:notice] %>
@@ -74,9 +43,13 @@
 			<% if flash[:error] %>
 			    <div id="error"><%= flash[:error] %></div>
 			<% end %>
+			
 			<%= @content_for_layout %>
 		</div><!-- content -->
-		
+		<div id="contentright">
+			ADS!
+		</div><!-- contentright -->
+		<div class="clear"></div>
 		<div id="footer">
 			<div id="footlinks">blog | terms of service | privacy policy</div>
 			<div id="copyright">Copyright &copy; 2009 by MadHatter Multimedia</div>
