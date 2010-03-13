@@ -1,4 +1,4 @@
-<h1>Upload your douche photo!</h1>
+<h1>Submit Photo</h1>
 
 <%= error_messages_for :photo %>
 <div id="form">
@@ -14,22 +14,20 @@
 	</tr>
 	<tr>
 		<td valign="top">*Description: </td>
-		<td><%= f.text_area :description %></td>
+		<td><%= f.text_area :description, :cols=>"26", :rows=>"8" %></td>
 	</tr>
 	<tr>
 		<td>*Location: </td>
 		<td><%= f.text_field :location, :value => "Unknown"%></td>
 	</tr>
 	<tr>
-		<td valign="top"><%= f.check_box :terms_acceptence %></td>
-		<td><-- I certify that I have the rights to syndicate this photo on the internet [?]</td>
+		<td valign="top" colspan="2"><%= f.check_box :terms_acceptence %> I certify that I have the rights to syndicate this photo on the internet [<%=link_to "?", {:action => 'rights', :controller => 'site'}, :rel => "facebox"%>]</td>
 	</tr>
 	<tr>
-		<td valign="top"><%= f.check_box :anony %></td>
-		<td><-- I would like this photo to be posted anonymously [?]</td>
+		<td valign="top"colspan="2"><%= f.check_box :anony %> I would like this photo to be posted anonymously [<%= link_to "?", {:action => 'anony', :controller => 'site'}, :rel => 'facebox'%>]</td>
 	</tr>
 	<tr>
-		<td><%= submit_tag 'Upload a Douche', :class => 'submit' %></td>
+		<td colspan="2"><%= submit_tag 'Submit', :class => 'submit' %></td>
 		<td></td>
 	</tr>
 </table>

@@ -7,7 +7,10 @@ module ApplicationHelper
   end
 
   def admin?
-    user?.admin
+    unless user?.nil?
+      return user?.admin
+    end
+    return false
   end
 
   # Check if user is logged in and login or create as needed

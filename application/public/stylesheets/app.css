@@ -28,6 +28,20 @@ img {
 .medium {
 	font-size: 14px;
 }
+#notice{
+	background: #CCF;
+	padding:10px;
+	width:575px;
+	margin:auto;
+	border: 1px solid #aaa;
+}
+#error{
+	background: #F30;
+	padding:10px;
+	width:575px;
+	margin:auto;
+	border: 1px solid #aaa;
+}
 #topback {
 	position: absolute;
 	z-index:-1;
@@ -83,7 +97,7 @@ img {
 	float:right;
 }
 #rightbox {
-	background: lightblue;
+	background: #eee;
 	border: 1px solid #aaa;
 	width: 100%;
 	padding-bottom:15px;

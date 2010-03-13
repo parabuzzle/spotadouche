@@ -25,8 +25,13 @@
 			<!--<%=link_to image_tag('douchesquare75.jpg'), :controller => 'site', :action => 'index' %> Spot a Douche-->
 		</div> <!-- logo -->
 		<ul class="right">
-		<li class="right"><%=link_to "Signup", {:controller => 'users', :action => 'signup'}, :style=>"background-image:none;"%></li>
-		<li class="right"><%=link_to "Login", :controller => 'users', :action => 'login'%></li>
+			<%if logged_in?%>
+				<li class="right"><%=link_to "Logout", {:controller => 'users', :action => 'logout'}, :style=>"background-image:none;"%></li>
+				<li class="right"><%=link_to "Account", :controller => 'users', :action => 'index'%></li>
+			<%else%>
+				<li class="right"><%=link_to "Signup", {:controller => 'users', :action => 'signup'}, :style=>"background-image:none;"%></li>
+				<li class="right"><%=link_to "Login", :controller => 'users', :action => 'login'%></li>
+			<%end%>
 		</ul>
 		<ul class="top">
 		<li class="top"><%=link_to "Home", :controller => 'site', :action => 'index'%></li>
@@ -37,6 +42,7 @@
 	<div class="clear"></div>
 	<div id="container">	
 		<div id="content">
+			<div id="error">Sorry...</div>
 			<% if flash[:notice] %>
 			   <div id="notice"><%= flash[:notice] %></div>
 			<% end %>
