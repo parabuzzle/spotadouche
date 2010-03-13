@@ -44,8 +44,14 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'register', :controller => 'users', :action => 'signup'
   map.connect 'profile/:login', :controller => "users", :action => "profile"
   map.connect 'user/edit/:id', :controller => "users", :action => "edit"
-  map.connect 'myprefs', :controller => "users", :action => "index"
+  map.connect 'account', :controller => "users", :action => "index"
+  map.connect 'search', :controller => "search", :actin => "index"
+  map.connect 'submitaphoto', :controller => "photos", :action => "new"
+  map.connect 'photo/edit/:id', :controller => 'photos', :action => 'edit'
   map.connect 'photo/:id', :controller => 'photos', :action => 'show'
+  map.connect 'about', :controller => 'site', :action => 'about'
+  map.connect 'terms', :controller => 'site', :action => 'terms'
+  map.connect 'privacy', :controller => 'site', :action => 'privacy'
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
 end

@@ -5,7 +5,7 @@ class Photo < ActiveRecord::Base
   attr_accessor :forceup
   
   acts_as_rated :with_stats_table => true
-  acts_as_ferret :fields => [ :title, :description, :location ]  
+  acts_as_ferret :fields => [ :title, :description, :location, :status ]  
   
   has_attachment :content_type => :image, 
                  :max_size => 50.megabytes,

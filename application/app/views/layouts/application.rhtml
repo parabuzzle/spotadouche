@@ -40,8 +40,8 @@
 	<div class="clear"></div>
 	<div id="contentright">
 		<div id="search">
-			<%form_for :search do |f|%>
-				<%=f.text_field :q, :class=>'searchbox', :size => '15'%>
+			<%form_for :search, :url => { :action => "index", :controller => "search" } do |f|%>
+				<%=f.text_field :q, :class=>'searchbox', :size => '15', :value => params[:query]%>
 				<%= submit_tag 'Search', :class => 'searchbutton' %>
 			<%end%>
 		</div>
@@ -64,9 +64,12 @@
 			<%= @content_for_layout %>
 		</div><!-- content -->
 		<div class="clear"></div>
+		<div id="paginate">
+			<%=unless @paginate.nil? then will_paginate @paginate end%>
+		</div>
 	</div> <!-- container-->
 	<% if ENV["RAILS_ENV"] == "production"%>
-		<div id="footerad">
+			<div id="footerad">
 			<script type="text/javascript"><!--
 			google_ad_client = "pub-3575518988540294";
 			/* SAD-Footer */

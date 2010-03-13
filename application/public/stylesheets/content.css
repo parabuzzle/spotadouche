@@ -57,3 +57,41 @@
 	margin-left:4px;
 	margin-top:20px;
 }
+#results {
+	padding:6px;
+}
+.sphoto {
+	width: 110px;
+	float:left;
+}
+.result {
+	padding-top:40px;
+	/*border-bottom: 2px solid #333;*/
+	padding-bottom: 20px;
+	padding-left: 6px;
+	padding-right: 6px;
+}
+.sdata {
+	width:470px;
+	float:right;
+}
+.stitle {
+	font-size: 18px;
+	border-bottom: 1px solid #333;
+}
+.sdesc {
+	padding-top: 4px;
+	font-size: 12px;
+	font-weight:none;
+}
+.sright {
+	text-align:right;
+	float:right;
+	padding-top: 5px;
+}
+.sloc {
+	font-size: 10px;
+}
+.scomment {
+	font-size: 14px;
+}

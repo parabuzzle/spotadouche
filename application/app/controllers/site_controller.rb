@@ -5,6 +5,7 @@ class SiteController < ApplicationController
     @title = "Spot a Douche"
     #@photos = Photo.find(:all, :order=> 'created_at desc', :conditions => "status >= 5")
     @photos = Photo.paginate :page => params[:page], :order => 'created_at DESC', :conditions => "status >= 5", :per_page => 5
+    @paginate = @photos
   end
   def about
     @title = "Spot a Douche - About Us"

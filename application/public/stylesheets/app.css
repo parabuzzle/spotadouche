@@ -85,12 +85,16 @@ img {
 	padding-top: 20px;
 	width: 100%;
 	background: #fff;
-	min-height:600px;
 }
 #content {
 	float:left;
+	min-height:450px;
+	_height:450px;
 	width:610px;
 	padding: 10px;
+}
+#paginate {
+	padding:10px;
 }
 #contentright{
 	padding:10px;
@@ -200,7 +204,7 @@ ul.right a {
 	text-decoration: none;
 	font-family: Georgia, "Times New Roman", Times, serif;
 	font-size: 21px;
-	color: #333;
+	color: #555;
 }
 li.top {
 	float: left;
@@ -219,7 +223,7 @@ ul.top a {
 	text-decoration: none;
 	font-family: Georgia, "Times New Roman", Times, serif;
 	font-size: 21px;
-	color: #333;
+	color: #555;
 }
 
 #footerad {
