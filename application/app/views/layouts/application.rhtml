@@ -65,6 +65,21 @@
 		</div><!-- content -->
 		<div class="clear"></div>
 	</div> <!-- container-->
+	<% if ENV["RAILS_ENV"] == "production"%>
+		<div id="footerad">
+			<script type="text/javascript"><!--
+			google_ad_client = "pub-3575518988540294";
+			/* SAD-Footer */
+			google_ad_slot = "7477203503";
+			google_ad_width = 468;
+			google_ad_height = 60;
+			//-->
+			</script>
+			<script type="text/javascript"
+			src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+			</script>
+		</div>
+	<%end%>
 	<div id="footer">
 		<div class="hdivf"></div>
 		<div id="footlinks"><a href="http://spotadouche.wordpress.com">Blog</a> | <%=link_to "Terms", :controller => "site", :action=>"terms"%> | <%=link_to "Privacy", :controller=>"site", :action=>"privacy"%></div>

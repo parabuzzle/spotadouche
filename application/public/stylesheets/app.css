@@ -221,3 +221,10 @@ ul.top a {
 	font-size: 21px;
 	color: #333;
 }
+
+#footerad {
+	width:100%;
+	text-align:center;
+	margin-top:10px;
+	margin-bottom: 10px;
+}
