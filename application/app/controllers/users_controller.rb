@@ -6,19 +6,28 @@ class UsersController < ApplicationController
     @title="Spot a Douche - User Dashboard"
     @user = User.find(session[:user])
     @prefs = @user.pref
+    @live = Photo.find(:all, :conditions => "user_id = #{@user.id} and status >= 5")
+    if @prefs.about.nil? || @prefs.about.empty?
+      if flash[:notice].nil? 
+        flash[:notice] = "You don't have any \"about me information\"<br/> <a href='/user/edit/#{@user.id}'>Click here</a> to add something now!</a>"
+      end
+    end
     redirect_to(:action => 'signup') unless logged_in? || User.count > 0
   end
 
   def profile
     @user = User.find_by_login(params[:login])
-    @photos = Photo.find(:all, :conditions => "user_id = #{@user.id} and anony != 1")
-    @live = Photo.find(:all, :conditions => "user_id = #{@user.id} and anony != 1 and status >= 5")
+    @photos = Photo.find(:all, :conditions => "user_id = #{@user.id}")
+    @live = Photo.find(:all, :conditions => "user_id = #{@user.id} and status >= 5")
     @title="Spot a Douche - #{@user.login}'s Profile"
   end
 
 
   def login
     @title="Spot a Douche - Login"
+    if params[:facebox] == 'true'
+      render :template => false
+    end
     return unless request.post?
     self.current_user = User.authenticate(params[:login], params[:password])
     if logged_in?
@@ -27,7 +36,7 @@ class UsersController < ApplicationController
         cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
       end
       redirect_back_or_default(:controller => '/users', :action => 'index')
-      flash[:notice] = "Logged in successfully"
+      flash[:notice] = "You have been logged in. Welcome back"
     end
   end
   
@@ -50,8 +59,8 @@ class UsersController < ApplicationController
     @user = User.find(id)
     @pref = @user.pref
     return unless request.post?
-    @user.update_attributes(id)
-    @pref.update_attributes(id)
+    @user.update_attributes(params[:user])
+    @pref.update_attributes(params[:pref])
     self.current_user = @user
     redirect_back_or_default(:controller => '/users', :action => 'index')
     flash[:notice] = "Updated User Settings"
@@ -62,6 +71,9 @@ class UsersController < ApplicationController
   def signup
     @title="Spot a Douche - Signup"
     @user = User.new(params[:user])
+    if params[:facebox] == 'true'
+      render :template => false
+    end
     return unless request.post?
     @user.save!
     self.current_user = @user
@@ -88,7 +100,7 @@ class UsersController < ApplicationController
       return true
     else
       session[:protected_page] = request.request_uri
-      flash[:notice] = "i can't do that dave... you can only edit your own stuff"
+      flash[:notice] = "I'm sorry, you aren't authorized to view that page."
       redirect_to :controller => "site", :action => "index"
       return false
     end

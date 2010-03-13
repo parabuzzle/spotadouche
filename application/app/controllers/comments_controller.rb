@@ -8,8 +8,10 @@ class CommentsController < ApplicationController
     if request.post?
       c = @photo.comments.new(params[:comment])
       c.ip = request.remote_ip
-      c.user_id = session[:user]
-      c.save
+      unless session[:user].nil?
+        c.user_id = session[:user]
+        c.save
+      end
       redirect_to :action => "show", :controller => 'photos', :id => params[:photoid]
     end
   end
@@ -30,6 +32,13 @@ class CommentsController < ApplicationController
   end
   
   private
+  def protect
+    unless logged_in?
+      session[:protected_page] = request.request_uri
+      flash[:error] = "I'm sorry. You must be logged in to leave comments."
+      return false
+    end
+  end
   
   def protect_sensitive
     user = User.find(session[:user])
@@ -37,7 +46,7 @@ class CommentsController < ApplicationController
       return true
     else
       session[:protected_page] = request.request_uri
-      flash[:notice] = "i can't do that dave... you can only edit your own stuff"
+      flash[:error] = "I'm sorry, you are not authorized to edit that page."
       redirect_to :controller => "site", :action => "index"
       return false
     end

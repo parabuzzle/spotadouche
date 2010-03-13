@@ -8,6 +8,9 @@
     position: relative;
     background: url(/images/star_rating.gif) top left repeat-x;        
 }
+.star-rating-message {
+	font-size:12px;
+}
 .star-rating li{
     padding:0px;
     margin:0px;

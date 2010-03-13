@@ -1,0 +1,59 @@
+.streamitem{
+	padding-top:26px;
+	padding-bottom:10px;
+	border-bottom: 2px solid #333;
+}
+.rating {
+	float:right;
+}
+.date {
+	padding-bottom: 6px;
+}
+.phototitle, .phototitle a {
+	color: #333;
+	padding:3px;
+	font-size:28px;
+}
+.photo {
+	border:0px;
+}
+.photodesc {
+	margin-top:10px;
+	margin-bottom:10px;
+	padding:8px;
+	background:#eee;
+	border: 1px #aaa solid;
+}
+.comcount {
+	padding:4px;
+}
+.loc {
+	padding:4px;
+	float:right;
+}
+
+.userinfo {
+	font-size:12px;
+}
+.admindata
+
+.img {
+	border:1px solid #333;
+}
+#userstats {
+	padding:4px;
+}
+.item {
+	margin-left:4px;
+}
+.h3 {
+	margin-top: 20px;
+	font-size:22px;
+}
+#dashavatar {
+	margin-left: 145px;
+}
+.about {
+	margin-left:4px;
+	margin-top:20px;
+}

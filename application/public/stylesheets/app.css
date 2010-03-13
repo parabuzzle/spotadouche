@@ -33,14 +33,15 @@ img {
 	padding:10px;
 	width:575px;
 	margin:auto;
+	margin-bottom:10px;
 	border: 1px solid #aaa;
 }
 #error{
-	background: #F30;
+	background: #ffff55;
 	padding:10px;
 	width:575px;
 	margin:auto;
-	border: 1px solid #aaa;
+	border: 1px solid #333;
 }
 #topback {
 	position: absolute;
@@ -84,7 +85,7 @@ img {
 	padding-top: 20px;
 	width: 100%;
 	background: #fff;
-	min-height: 400px;
+	min-height:600px;
 }
 #content {
 	float:left;
@@ -129,6 +130,31 @@ img {
 	float:left;
 	padding: 4px;
 	color:#fff;
+}
+#footlinks a {
+	color:#fff;
+}
+.coitop {
+	margin: -3px;
+	width:554px;
+	height: 18px;
+	background-image: url('/images/bubbletop.png');
+}
+.coimid {
+	margin: -3px;
+	padding-left:20px;
+	width:534px;
+	background-image: url('/images/bubblecenter.png');
+}
+.coibot {
+	margin: -3px;
+	width:554px;
+	height: 28px;
+	background-image: url('/images/bubblebottom.png');
+}
+.commenter {
+	margin-left: 145px;
+	margin-bottom: 35px;
 }
 .searchbox {
 	font-size: 15px;

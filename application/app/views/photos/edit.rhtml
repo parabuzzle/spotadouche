@@ -1,8 +1,8 @@
 <%if admin?%>
 <% form_for :photo do |f| %>
-<h1><%=f.text_field :title%></h1>
+<h1>Title: <%=f.text_field :title%></h1>
 <div class="streamitem">
-	<div class="date"><%=reldate @photo.created_at%></div>
+	<div class="date"><!-- Uploaded <%=reldate @photo.created_at%>--> <%=@photo.created_at.to_s(:pretty)%></div>
 	<%if @photo.status >= 5%>
 	<div class="rating">
 		<div id="star-ratings-block<%=@photo.id%>">
@@ -15,14 +15,15 @@
 	</div>
 	<%end%>
 	<div class="photo"><%= image_tag(@photo.public_filename) %></div>
-	<div class="photodesc"><%= f.text_area :description%></div>
+	<div class="photodesc2"><%= f.text_area :description, :rows=>"8", :cols=>'65'%></div>
+	<div class="photodesc2">Location <%= f.text_field :location %></div>
 	<div class="comcount">Comments: <%=@comments.length%></div>
 	<div class="userinfo">
 		Anonymous? <%=f.check_box :anony%><br/>
 		<%if @photo.anony == true %>
 			Uploaded by: Anonymous Coward
 		<%else%>
-			Uploaded by: <%= link_to @user.login, :controller => 'users', :action => 'profile', :id => @user.id%>
+			Uploaded by: <%= link_to @user.login, :controller => 'users', :action => 'profile', :login => @user.login%>
 		<%end%>
 	</div>
 	<%= submit_tag 'Save!', :class => 'submit' %>
@@ -30,21 +31,7 @@
 	<% if logged_in? and admin? %>
 	<div id="admindata">ip - <%=@photo.ip%>
 		<div id="status-block-<%=@photo.id%>"><%= render :partial => "admin/statusupdate", :locals => { :photo => @photo} %></div>
-	<%end%>
-	<div id="comments">
-		<h3>Comments</h3>
-		<% for comment in @comments do%>
-			<div class="coitem"><%=comment.data%><div>
-			<div class="coitem">By: <%=comment.user.login%></div>
-		<%end%>
-		<% form_for :comment do |f|%>
-		<p><label for="data">Leave a Comment:</label><br/>
-		<%= f.text_area :data, :size => '70x5' %></p>
-		<p><%= submit_tag 'Comment' %></p>
-		<%end%>
-	</div>
-	
-		
+	<%end%>	
 </div>
 <%else%>
 I'm sorry, only admins can edit photos

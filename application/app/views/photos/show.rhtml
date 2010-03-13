@@ -1,39 +1,47 @@
-<h1><%=h @photo.title%></h1>
+
 <div class="streamitem">
-	<div class="date"><%=reldate @photo.created_at%></div>
-	<%if @photo.status >= 5%>
+	<div class="date"><!-- Uploaded <%=reldate @photo.created_at%>--> <%=@photo.created_at.to_s(:pretty)%></div>
 	<div class="rating">
-		<div id="star-ratings-block<%=@photo.id%>">
+		<div id="star-ratings-block<%=@photo.id%>" class="rating">
 	    	<%= render :partial => "ratings/rate", :locals => { :photo => @photo } %>
 		</div>
 	</div>
-	<%else%>
-	<div class="rating">
-		Photo has not been approved yet
-	</div>
-	<%end%>
+	<div class="phototitle"><%=h @photo.title%></div>
+	<div class="clear"></div>
 	<div class="photo"><%= image_tag(@photo.public_filename) %></div>
 	<div class="photodesc"><%=h @photo.description%></div>
-	<div class="comcount">Comments: <%=@comments.length%></div>
+	<div class="loc">Location: <%if @photo.location.nil?%>Unknown<%else%><%=h @photo.location%><%end%></div>
+	<div class="comcount">Comments: <%=link_to @photo.comments.count, :controller => 'photos', :action => 'show', :id => @photo.id%></div>
+	<div class="clear"></div>
 	<div class="userinfo">
 		<%if @photo.anony == true %>
-			Uploaded by: Anonymous Coward
+			Uploaded by: Anonymous Coward via <%=h @photo.via%>
 		<%else%>
-			Uploaded by: <%= link_to @user.login, :controller => 'users', :action => 'profile', :id => @user.id%>
+			Uploaded by: <%= link_to @photo.user.login, :controller => 'users', :action => 'profile', :login => @photo.user.login%> via <%=h @photo.via%>
 		<%end%>
 	</div>
 	<div id="comments">
 		<h3>Comments</h3>
 		<% for comment in @comments do%>
-			<div class="coitem"><%=comment.data%><div>
-			<div class="coitem">By: <%=comment.user.login%></div>
+			<div class="coitop"></div>
+			<div class="coimid"><%=h comment.data%></div>
+			<div class="coibot"></div>
+			<div class="commenter">By: <%=link_to h(comment.user.login), :action => "profile", :controller => "users", :login=>comment.user.login%> <span class="small"><%=reldate comment.created_at%></span></div>
 		<%end%>
 		<%= will_paginate @comments %>
 		<% form_for :comment, :url => { :action => "new", :controller => "comments", :photoid => @photo.id } do |f|%>
-		<p><label for="data">Leave a Comment:</label><br/>
+		<p><label for="data">Leave a Comment:</label><br/></p>
 		<%= f.text_area :data, :size => '70x5' %></p>
 		<p><%= submit_tag 'Comment' %></p>
 		<%end%>
 	</div>
-		
+	<% if logged_in? and admin? %>
+	<div class="admindata">
+		Admin Stuff
+		<br/>
+		ip - <%=@photo.ip%>
+		<br/>
+		<%=link_to "Edit Photo", :controller => "photos", :action => "edit", :id => @photo.id%>
+	</div>
+	<%end%>
 </div>

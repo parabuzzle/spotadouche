@@ -1,13 +1,22 @@
-<h1>User Dashboard <span class="medium"<%=link_to "Edit", :action => 'edit', :id => @user.id%></span></h1>
+<h1>User Dashboard <span class="medium"<%=link_to "Edit my settings", :action => 'edit', :id => @user.id%></span></h1>
 
-<div id="dashavatar"><%=image_tag 'http://www.gravatar.com/avatar/'+Digest::MD5.hexdigest(@user.email)+'?s=150'%></div>
-<div class="small">avatar provided by <a href="http://gravatar.com">gravatar</a></div>
+<div class="coitop"></div>
+<%if @user.pref.about.nil? || @user.pref.about.empty?%>
+	<div class="coimid">I have nothing to say...</div>
+<%else%>
+	<div class="coimid"><%=h @user.pref.about%></div>
+<%end%>
+<div class="coibot"></div>
+<div id="dashavatar"><%=image_tag 'http://www.gravatar.com/avatar/'+Digest::MD5.hexdigest(@user.email)+'?s=150'%>
+	<div class="small">avatar provided by <a href="http://gravatar.com">gravatar</a></div>
+</div>
 <br/>
 
 <div class="item">Username: <%=h @user.login%></div>
-<div class="item">Your Email: <%=h @user.email%></div>
-<div class="item">Your secret submission email address: <%=h @prefs.submission_email%>@submit.spotadouche.com (<%=link_to 'generate new email', {:action => 'submit_email_gen'}, :confirm => 'This will change your submission email address and cannot be reversed. Are you sure you want to do this?', :method => 'post'%>)</div>
-<div class="item">Automatically set my new uploads as annoymous: <%=@prefs.default_annonimize%></div>
-<div class="item">About ME: <%=h @prefs.about%></div>
+<div class="item">Your Email: <%=h @user.email%> <span class="small">(don't worry we never share this)</span></div>
+<!--<div class="item">Your secret submission email address: <%=h @prefs.submission_email%>@submit.spotadouche.com (<%=link_to 'generate new email', {:action => 'submit_email_gen'}, :confirm => 'This will change your submission email address and cannot be reversed. Are you sure you want to do this?', :method => 'post'%>)</div>
+<div class="item">Automatically set my new uploads as annoymous: <%=@prefs.default_annonimize%></div> -->
 <br/>
-<div class="item">You have uploaded <%=@user.photos.count%> total photo(s) (<%=link_to "Upload a Douche Photo", :controller => 'photos', :action => 'new'%>)</div>
+<div class="item">You have uploaded <%=@user.photos.count%> total photo(s) including anonymous photos</div>
+<div class="item">Photos Approved: <%=@live.length%></div>
+<div class="item"><%=link_to "Upload a Douche Photo", :controller => 'photos', :action => 'new'%></div>

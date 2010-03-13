@@ -20,5 +20,17 @@ class SiteController < ApplicationController
     if params[:facebox] == 'true'
       render :template => false
     end
+  end
+  def dailydouche
+    @title = "Spot a Douche - What is the Daily Douche?"
+    if params[:facebox] == 'true'
+      render :template => false
+    end
+  end
+  def terms
+    @title="Spot a Douche - Terms of Use"
+  end
+  def privacy
+    @title="Spot a Douche - Privacy Policy"
   end 
 end

@@ -1,0 +1,30 @@
+.debug_info {
+	background:#fff;
+	border: 0px;
+}
+
+legend {
+	background:#000;
+	padding: 6px;
+	color:#fff;
+}
+
+.white, .white a {
+	color:#fff;
+}
+
+.admindata {
+	margin-top:20px;
+}
+.h {
+	border-bottom:2px #333 solid;
+}
+.errorExplanation {
+	margin: auto;
+	padding: 3px;
+	padding-left: 10px;
+	padding-right: 10px;
+	background: #ffff55;
+	border: 1px solid #333;
+	margin-bottom: 10px;
+}

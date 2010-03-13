@@ -1,29 +1,35 @@
-<h1>Latest Douche Spottings</h1>
+<h1>Douche Stream</h1>
 <%for photo in @photos%>
 	<div class="streamitem">
-		<div class="date">Uploaded <%=reldate photo.created_at%></div>
+		<div class="date"><!-- Uploaded <%=reldate photo.created_at%>--> <%=photo.created_at.to_s(:pretty)%></div>
 		<div class="rating">
-			<div id="star-ratings-block<%=photo.id%>">
+			<div id="star-ratings-block<%=photo.id%>" class="rating">
 		    	<%= render :partial => "ratings/rate", :locals => { :photo => photo } %>
 			</div>
 		</div>
-		<div class="phototitle"><%=h photo.title%></div>
+		<div class="phototitle"><%=link_to photo.title, :controller => 'photos', :action => 'show', :id => photo.id%></div>
+		<div class="clear"></div>
 		<div class="photo"><%= image_tag(photo.public_filename) %></div>
 		<div class="photodesc"><%=h photo.description%></div>
-		<div class="comcount">Comments: <%=link_to photo.comments.count, :controller => 'photos', :action => 'show', :id => photo.id%></div>
-		<div class="loc">Location: <%if photo.location.nil?%>Unknown<%else%><%=photo.location%><%end%></div>
+		<div class="loc">Location: <%if photo.location.nil?%>Unknown<%else%><%=h photo.location%><%end%></div>
+		<div class="comcount"><%=link_to "Comments: #{photo.comments.count}", :controller => 'photos', :action => 'show', :id => photo.id%></div>
+		<div class="clear"></div>
 		<div class="userinfo">
 			<%if photo.anony == true %>
-				Uploaded by: Anonymous Coward
+				Uploaded by: Anonymous Coward via <%=h photo.via%>
 			<%else%>
-				Uploaded by: <%= link_to photo.user.login, :controller => 'users', :action => 'profile', :id => photo.user.id%>
+				Uploaded by: <%= link_to photo.user.login, :controller => 'users', :action => 'profile', :login => photo.user.login%> via <%=h photo.via%>
 			<%end%>
 		</div>
 		<% if logged_in? and admin? %>
-		<div id="admindata">ip - <%=photo.ip%>
-			<div id="status-block-<%=photo.id%>"><%= render :partial => "admin/statusupdate", :locals => { :photo => photo} %></div>
+		<div class="admindata">
+			Admin Stuff
+			<br/>
+			ip - <%=photo.ip%>
+			<br/>
+			<%=link_to "Edit Photo", :controller => "photos", :action => "edit", :id => photo.id%>
+		</div>
 		<%end%>
 	</div>
-	---
 <% end %>
 <%= will_paginate @photos %>

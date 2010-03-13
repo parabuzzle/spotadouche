@@ -1,6 +1,16 @@
-<h1><%=@user.login%>'s Profile</h1>
-
-<div id="dashavatar"><%=image_tag 'http://www.gravatar.com/avatar/'+Digest::MD5.hexdigest(@user.email)+'?s=150'%></div>
-<div class="small">avatar provided by <a href="http://gravatar.com">gravatar</a></div>
-<br/>
-<div class="item"><%=@user.login%> has uploaded <%=@photos.length%> total photo(s) and <%= @live.length %> <% unless @live.length == 1%> have <%else%> has <%end%> been approved by the Spot a Douche moderation team</div>
+<h1><%=h @user.login%>'s Profile</h1>
+<div class="coitop"></div>
+<%if @user.pref.about.nil? || @user.pref.about.empty?%>
+	<div class="coimid">I have nothing to say...</div>
+<%else%>
+	<div class="coimid"><%=h @user.pref.about%></div>
+<%end%>
+<div class="coibot"></div>
+<div id="dashavatar"><%=image_tag 'http://www.gravatar.com/avatar/'+Digest::MD5.hexdigest(@user.email)+'?s=150'%>
+	<div class="small">avatar provided by <a href="http://gravatar.com">gravatar</a></div>
+</div>
+<div id="userstats">
+	<div class="h3">User Stats</div>
+	<div class="item">Photos Uploaded: <%=@photos.length%></div>
+	<div class="item">Photos Approved: <%=@live.length%></div>
+</div>

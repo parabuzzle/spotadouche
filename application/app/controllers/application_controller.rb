@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
   def protect
     unless logged_in?
       session[:protected_page] = request.request_uri
-      flash[:notice] = "i can't do that dave... you must be logged in first"
+      flash[:error] = "I'm sorry. You must be logged in to access that section of the site."
       redirect_to :controller => "site", :action => "index"
       return false
     end

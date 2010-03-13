@@ -34,7 +34,7 @@ class PhotosController < ApplicationController
     @photo = @user.photos.new(params[:photo])
     @photo.ip = request.remote_ip
     if @photo.save
-      flash[:notice] = 'Your douche photo has been submitted. Upon approval your image will be available for the masses'
+      flash[:notice] = 'Your photo has been submitted for approval. It should be available shortly.'
       redirect_to :controller => 'site', :action => 'index'    
     else
       render :action => :new
@@ -50,7 +50,7 @@ class PhotosController < ApplicationController
       return true
     else
       session[:protected_page] = request.request_uri
-      flash[:notice] = "i can't do that dave... you can only edit your own stuff"
+      flash[:error] = "I'm sorry, you are not authorized to view that page."
       redirect_to :controller => "site", :action => "index"
       return false
     end

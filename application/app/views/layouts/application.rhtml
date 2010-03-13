@@ -9,11 +9,6 @@
 	<%= javascript_include_tag 'facebox'%>
 	<%= javascript_include_tag 'application' %>
 	<%= javascript_include_tag 'prototype'%>
-	
-	<!-- Load Facebook javascript -->
-	<!-- <%= facebook_connect_javascript %>
-	<%= facebook_connect_init %> -->
-	
   </head>
   
   <body>
@@ -28,9 +23,12 @@
 			<%if logged_in?%>
 				<li class="right"><%=link_to "Logout", {:controller => 'users', :action => 'logout'}, :style=>"background-image:none;"%></li>
 				<li class="right"><%=link_to "Account", :controller => 'users', :action => 'index'%></li>
+				<%if admin?%>
+					<li class="right"><%=link_to "Admin", :controller => 'admin', :action => 'index'%></li>
+				<%end%>
 			<%else%>
-				<li class="right"><%=link_to "Signup", {:controller => 'users', :action => 'signup'}, :style=>"background-image:none;"%></li>
-				<li class="right"><%=link_to "Login", :controller => 'users', :action => 'login'%></li>
+				<li class="right"><%=link_to "Signup", {:controller => 'users', :action => 'signup'}, :rel => 'facebox', :style=>"background-image:none;"%></li>
+				<li class="right"><%=link_to "Login", {:controller => 'users', :action => 'login'}, :rel => 'facebox'%></li>
 			<%end%>
 		</ul>
 		<ul class="top">
@@ -40,9 +38,22 @@
 		</ul>
 	</div><!-- header -->
 	<div class="clear"></div>
+	<div id="contentright">
+		<div id="search">
+			<%form_for :search do |f|%>
+				<%=f.text_field :q, :class=>'searchbox', :size => '15'%>
+				<%= submit_tag 'Search', :class => 'searchbutton' %>
+			<%end%>
+		</div>
+		<!--
+		<div id="rightbox">
+			<div id="rcontent">
+				<div id="socbuttons"><%=image_tag('rss.png')%> <%=image_tag('facebutton.png')%></div>
+			</div>
+		</div> -->
+	</div><!-- contentright -->
 	<div id="container">	
 		<div id="content">
-			<div id="error">Sorry...</div>
 			<% if flash[:notice] %>
 			   <div id="notice"><%= flash[:notice] %></div>
 			<% end %>
@@ -52,35 +63,22 @@
 			
 			<%= @content_for_layout %>
 		</div><!-- content -->
-		<div id="contentright">
-			<div id="search">
-				<%form_for :search do |f|%>
-					<%=f.text_field :q, :class=>'searchbox', :size => '15'%>
-					<%= submit_tag 'Search', :class => 'searchbutton' %>
-				<%end%>
-			</div>
-			<div id="rightbox">
-				<div id="rcontent">
-					<div id="socbuttons"><%=image_tag('rss.png')%> <%=image_tag('facebutton.png')%></div>
-				</div>
-			</div>
-		</div><!-- contentright -->
 		<div class="clear"></div>
 	</div> <!-- container-->
 	<div id="footer">
 		<div class="hdivf"></div>
-		<div id="footlinks">blog | terms of service | privacy policy</div>
-		<div id="copyright">Copyright &copy; 2009 by MadHatter Multimedia</div>
+		<div id="footlinks"><a href="http://spotadouche.wordpress.com">Blog</a> | <%=link_to "Terms", :controller => "site", :action=>"terms"%> | <%=link_to "Privacy", :controller=>"site", :action=>"privacy"%></div>
+		<div id="copyright">Copyright &copy; <%=Time.now.year%> by spotadouche.com</div>
 		<div class="clear"></div>
 	</div><!-- footer -->
     
     <% if ENV["RAILS_ENV"] == "development"%>
     <!-- Dev stuff (outside container) -->
-    <div id="debug">
-		<a href='#' onclick="$('#params_debug_info').toggle();return false;">params</a> |
-		<a href='#' onclick="$('#session_debug_info').toggle();return false;">session</a> |
-		<a href='#' onclick="$('#env_debug_info').toggle();return false;">env</a> |
-		<a href='#' onclick="$('#request_debug_info').toggle();return false;">request</a>    
+    <div id="debug", class="white">
+		<a href='#' onclick="jQuery('#params_debug_info').toggle();return false;">params</a> |
+		<a href='#' onclick="jQuery('#session_debug_info').toggle();return false;">session</a> |
+		<a href='#' onclick="jQuery('#env_debug_info').toggle();return false;">env</a> |
+		<a href='#' onclick="jQuery('#request_debug_info').toggle();return false;">request</a>    
       <fieldset id="params_debug_info" class="debug_info" style="display:none;">
         <legend>params</legend>
         <%= debug(params) %>

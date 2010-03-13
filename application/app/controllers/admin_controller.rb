@@ -85,7 +85,7 @@ class AdminController < ApplicationController
   def protect
      unless admin?
        session[:protected_page] = request.request_uri
-       flash[:notice] = "i can't do that dave... you must be an admin"
+       flash[:error] = "I can't do that dave... You must be an admin to do that"
        redirect_to :controller => "site", :action => "index"
        return false
      end

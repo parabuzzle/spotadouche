@@ -13,12 +13,12 @@
 			<%if photo.anony == true %>
 				Uploaded by: <%= link_to photo.user.login, :controller => 'users', :action => 'profile', :id => photo.user.id%> (Will be Anonymous Coward)
 			<%else%>
-				Uploaded by: <%= link_to photo.user.login, :controller => 'users', :action => 'profile', :id => photo.user.id%>
+				Uploaded by: <%= link_to photo.user.login, :controller => 'users', :action => 'profile', :login => photo.user.login%>
 			<%end%>
 		</div>
+		<div class="adminedit"><%=link_to "Edit Photo", :controller => "photos", :action => "edit", :id => photo.id%></div>
 		<div id="status-block-<%=photo.id%>"><%= render :partial => "admin/statusupdate", :locals => { :photo => photo} %></div>
 	</div>
-	---
 <% end %> 
 
 <%= will_paginate @pending %>

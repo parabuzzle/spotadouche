@@ -1,6 +1,8 @@
+<h1>Join Spot a Douche</h1>
 <%= error_messages_for :user %>
+<div class="item">
 <% form_for :user do |f| -%>
-<p><label for="login">Login</label><br/>
+<p><label for="login">Username</label><br/>
 <%= f.text_field :login %></p>
 
 <p><label for="email">Email</label><br/>
@@ -14,3 +16,4 @@
 
 <p><%= submit_tag 'Sign up' %></p>
 <% end -%>
+</div>
