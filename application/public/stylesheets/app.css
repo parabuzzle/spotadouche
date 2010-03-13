@@ -32,6 +32,7 @@ img {
 	position: absolute;
 	z-index:-1;
 	width:100%;
+	background-repeat: repeat-x;
 	background-image:url('/images/back-stripe-top.png');
 	height: 606px;
 }
