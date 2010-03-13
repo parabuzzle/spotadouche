@@ -10,7 +10,7 @@
 	<div class="clear"></div>
 	<div class="photo"><%= image_tag(@photo.public_filename) %></div>
 	<div class="photodesc"><%=h @photo.description%></div>
-	<div class="loc">Location: <%if @photo.location.nil?%>Unknown<%else%><%=h @photo.location%><%end%></div>
+	<div class="loc">Location: <%if @photo.location.nil?%>Unknown<%else%><%=link_to h(@photo.location), :action => 'index', :controller => 'search', :query => "location:#{@photo.location}"%><%end%></div>
 	<div class="comcount">Comments: <%=@photo.comments.count%></div>
 	<div class="clear"></div>
 	<div class="userinfo">
