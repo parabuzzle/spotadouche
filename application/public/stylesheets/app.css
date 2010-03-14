@@ -1,5 +1,5 @@
 body {
-	background-image:url('/images/back-stripe-bottom.png');
+	background-image:url('/images/back-stripe-red-bottom.png');
 	margin: 0px;
 	z-index:-2;
 	padding: 0px;
@@ -48,19 +48,24 @@ img {
 	z-index:-1;
 	width:100%;
 	background-repeat: repeat-x;
-	background-image:url('/images/back-stripe-top.png');
+	background-image:url('/images/back-stripe-red-top.png');
 	height: 606px;
 }
 #main {
 	width: 960px;
 	margin:auto;
 }
-#logo {
-	/* background-image: url(/images/douchehead.jpg); */
+#toppush {
 	padding-top: 20px;
 	text-align: center;
 	font-size: 32px;
-	height: 150px;
+	height: 90px;
+}
+#logo {
+	position:absolute;
+	padding-top: 20px;
+	text-align: center;
+	font-size: 32px;
 }
 .topbar {
 	height:60px;

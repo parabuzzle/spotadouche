@@ -1,6 +1,7 @@
 class SearchController < ApplicationController
   def index
     @title = "Spot a Douche - Search"
+    if params[:query] == '' then params[:query] = nil end
     unless params[:query].nil?
       q = "#{params[:query]} +status:5"
       @total = Photo.total_hits(q)

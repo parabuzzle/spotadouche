@@ -16,9 +16,9 @@
 	<div id ="main">
 	<div id="header">
 		<div id="logo">
-			[LOGO GOES HERE]
-			<!--<%=link_to image_tag('douchesquare75.jpg'), :controller => 'site', :action => 'index' %> Spot a Douche-->
+			<%=image_tag('logo.png')%>
 		</div> <!-- logo -->
+		<div id="toppush"></div>
 		<ul class="right">
 			<%if logged_in?%>
 				<li class="right"><%=link_to "Logout", {:controller => 'users', :action => 'logout'}, :style=>"background-image:none;"%></li>
