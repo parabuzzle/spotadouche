@@ -1,5 +1,7 @@
 *.log
 *.sqlite3
+*.pid
+*.out
 config/database.yml
 config/facebooker.yml
 config/amazon_s3.yml
