@@ -115,6 +115,7 @@ img {
 }
 #rcontent {
 	text-align:center;
+	margin:auto;
 	padding:6px;
 }
 #socbuttons{
