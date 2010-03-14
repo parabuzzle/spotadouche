@@ -1,4 +1,7 @@
+<!-- <div id="socbuttons"><%=image_tag('rss.png')%></div> -->
+
 <h1>Douche Stream</h1>
+<div class="clear"></div>
 <%for photo in @photos%>
 	<div class="streamitem">
 		<div class="date"><!-- Uploaded <%=reldate photo.created_at%>--> <%=photo.created_at.to_s(:pretty)%></div>
@@ -20,6 +23,13 @@
 			<%else%>
 				Uploaded by: <%= link_to photo.user.login, :controller => 'users', :action => 'profile', :login => photo.user.login%> via <%=h photo.via%>
 			<%end%>
+		</div>
+		<div class="share">
+			<a href="http://www.facebook.com/sharer.php?u=http://<%=request.host %>/photo/<%=photo.id%>&t=<%=photo.title%>" target="blank"><img src="/images/facebook.gif" border="0px" alt="facebook"/></a> 
+			<a href="http://twitter.com/home?status=http://<%=request.host %>/photo/<%=photo.id%>" target="blank"><img src="/images/twitter.gif" border="0px" alt="twitter"/></a> 
+			<a href="http://www.myspace.com/Modules/PostTo/Pages/?u=http://<%=request.host %>/photo/<%=photo.id%>&t=<%=photo.title%>&c=<%=photo.description[0,140]%>[...]" target="blank"><img src="/images/myspace.png" border="0px" alt="myspace"/></a> 
+			<a href="http://digg.com/submit?phase=2&url=http://<%=request.host %>/photo/<%=photo.id%>&title=<%=photo.title%>&bodytext=<%=photo.description[0,140]%>[...]" target="blank"><img src="/images/digg.png" border="0px" alt="digg"/></a> 
+			<a href="http://delicious.com/post?url=http://<%=request.host %>/photo/<%=photo.id%>&title=<%=photo.title%>&title=<%=photo.title%>" target="blank"><img src="/images/delicious.png" border="0px" alt="delicious"/></a>
 		</div>
 		<% if logged_in? and admin? %>
 		<div class="admindata">

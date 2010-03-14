@@ -114,10 +114,12 @@ img {
 	padding-top:15px;
 }
 #rcontent {
+	text-align:center;
 	padding:6px;
 }
 #socbuttons{
 	text-align:right;
+	float:right;
 }
 #search{
 	text-align:right;
@@ -236,4 +238,8 @@ ul.top a {
 	text-align:center;
 	margin-top:10px;
 	margin-bottom: 10px;
+}
+
+.share {
+	padding: 10px;
 }
