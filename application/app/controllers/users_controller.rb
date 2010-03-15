@@ -59,9 +59,11 @@ class UsersController < ApplicationController
     @user = User.find(id)
     @pref = @user.pref
     return unless request.post?
-    @user.update_attributes(params[:user])
-    @pref.update_attributes(params[:pref])
+    if params[:user][:email] != @user.email then oldemail = @user.email end
+    return unless @user.update_attributes(params[:user])
+    return unless @pref.update_attributes(params[:pref])
     self.current_user = @user
+    if oldemail != nil then Mail.deliver_emailchange(@user, oldemail)end
     redirect_back_or_default(:controller => '/users', :action => 'index')
     flash[:notice] = "Updated User Settings"
   rescue ActiveRecord::RecordInvalid
@@ -77,6 +79,8 @@ class UsersController < ApplicationController
     return unless request.post?
     @user.save!
     self.current_user = @user
+    Mail.deliver_welcome(@user)
+    Mail.deliver_newuser(@user)
     redirect_back_or_default(:controller => '/users', :action => 'index')
     flash[:notice] = "Thanks for signing up!"
   rescue ActiveRecord::RecordInvalid
@@ -90,6 +94,38 @@ class UsersController < ApplicationController
     reset_session
     flash[:notice] = "You have been logged out."
     redirect_back_or_default(:controller => 'site', :action => 'index')
+  end
+  
+  def forgot_password
+    return unless request.post?
+    if @user = User.find_by_email(params[:email])
+      @user.forgot_password
+      @user.save
+      redirect_back_or_default(:controller => 'site', :action => 'index')
+      flash[:notice] = "A password reset link has been sent to your email address" 
+    else
+      flash[:notice] = "Could not find a user with that email address" 
+    end
+  end
+
+  def reset_password
+    if logged_in? then @user = User.find(session[:user]) else @user = User.find_by_password_reset_token(params[:id]) end
+    raise if @user.nil?
+    return if @user unless params[:password]
+      if (params[:password] == params[:password_confirmation])
+        self.current_user = @user #for the next two lines to work
+        current_user.password_confirmation = params[:password_confirmation]
+        current_user.password = params[:password]
+        @user.reset_password
+        flash[:notice] = current_user.save ? "Password reset" : "Password not reset" 
+      else
+        flash[:notice] = "Password mismatch" 
+      end  
+      redirect_back_or_default(:controller => '/account', :action => 'index') 
+  rescue
+    logger.error "Invalid Reset Token entered" 
+    flash[:notice] = "Sorry - That is an invalid password reset code. Please check your code and try again." 
+    redirect_back_or_default(:controller => '/account', :action => 'index')
   end
   
   private 

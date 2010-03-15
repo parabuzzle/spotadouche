@@ -19,6 +19,11 @@ class User < ActiveRecord::Base
   validates_uniqueness_of   :login, :email, :case_sensitive => false
   before_save :encrypt_password
   after_create :build_pref
+  
+  def after_save
+    Mail.deliver_forgot_password(self) if self.recently_forgot_password?
+    Mail.deliver_reset_password(self) if self.recently_reset_password?
+  end
 
   
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
@@ -57,8 +62,33 @@ class User < ActiveRecord::Base
     self.remember_token            = nil
     save(false)
   end
-
+  
+  def forgot_password
+    @forgotten_password = true
+    self.make_password_reset_token
+  end
+  
+  def reset_password
+    # First update the password_reset_token before setting the 
+    # reset_password flag to avoid duplicate email notifications.
+    update_attributes(:password_reset_token => nil)
+    @reset_password = true
+  end
+  
+  def recently_reset_password?
+    @reset_password
+  end
+  
+  def recently_forgot_password?
+    @forgotten_password
+  end
+  
   protected
+  
+    def make_password_reset_token
+      self.password_reset_token = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
+    end
+
     # before filter 
     def encrypt_password
       return if password.blank?

@@ -14,6 +14,7 @@
 
 <div class="item">Username: <%=h @user.login%></div>
 <div class="item">Your Email: <%=h @user.email%> <span class="small">(don't worry we never share this)</span></div>
+<div class="item"><%=link_to "Change your Password", :action=>"reset_password"%></div>
 <!--<div class="item">Your secret submission email address: <%=h @prefs.submission_email%>@submit.spotadouche.com (<%=link_to 'generate new email', {:action => 'submit_email_gen'}, :confirm => 'This will change your submission email address and cannot be reversed. Are you sure you want to do this?', :method => 'post'%>)</div>
 <div class="item">Automatically set my new uploads as annoymous: <%=@prefs.default_annonimize%></div> -->
 <br/>

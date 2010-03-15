@@ -44,6 +44,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'register', :controller => 'users', :action => 'signup'
   map.connect 'profile/:login', :controller => "users", :action => "profile"
   map.connect 'user/edit/:id', :controller => "users", :action => "edit"
+  map.connect 'forgot_password', :controller => "users", :action => "forgot_password"
   map.connect 'account', :controller => "users", :action => "index"
   map.connect 'search', :controller => "search", :actin => "index"
   map.connect 'submitaphoto', :controller => "photos", :action => "new"

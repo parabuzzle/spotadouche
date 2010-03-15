@@ -14,3 +14,7 @@
 <p><%= submit_tag 'Log in' %></p>
 <% end -%>
 </div>
+
+<%=link_to "Forgot Password", :action => 'forgot_password' %>
+
+<div class="new">Don't have an account? <%=link_to "Signup Now", :action => "signup"%></div>
