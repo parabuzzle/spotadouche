@@ -3,6 +3,7 @@
 *.pid
 *.out
 config/database.yml
+config/siteprops.yml
 config/facebooker.yml
 config/amazon_s3.yml
 config/ferret_server.yml

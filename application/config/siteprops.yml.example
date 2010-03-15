@@ -1,0 +1,3 @@
+admin:
+    email: mike@spotadouche.com #This is where admin emails are sent
+    from: Douche Admin <admin@spotadouche.com> #This is where admin emails come from

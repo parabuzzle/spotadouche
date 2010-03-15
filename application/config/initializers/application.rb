@@ -1,5 +1,8 @@
 #This file loads extra envrionment stuff
 
+#init site props
+SITE_PROPS = YAML::load(File.open("#{RAILS_ROOT}/config/siteprops.yml"))
+
 #Add pretty date format
 ActiveSupport::CoreExtensions::Time::Conversions::DATE_FORMATS.merge!(:pretty => "%B %d, %Y")
 
