@@ -34,4 +34,7 @@ class SiteController < ApplicationController
   def privacy
     @title="Spot a Douche - Privacy Policy"
   end 
+  def render_404
+    render :file => File.join(RAILS_ROOT, 'public', '404.html'), :layout => true, :status => 404
+  end
 end

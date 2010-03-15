@@ -54,4 +54,5 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'privacy', :controller => 'site', :action => 'privacy'
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
+  map.connect '*path', :controller => 'site', :action => 'render_404'
 end
