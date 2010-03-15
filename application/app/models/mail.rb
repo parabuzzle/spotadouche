@@ -12,14 +12,16 @@ class Mail < ActionMailer::Base
     recipients 'admin@spotadouche.com'
     subject "[Douche] New User - #{user.login}"
     from "Douche Admin <admin@spotadouche.com>"
+    content_type "text/html"
     body :user => user
   end
   
-  def newphoto(email, photo)
-    recipients email
+  def newphoto(photo, user, host="spotadouche.com")
+    recipients "admin@spotadouche.com"
     subject "[Douche] There is a new photo"
     from "Douche Admin <admin@spotadouche.com>"
-    body :login => photo
+    content_type "text/html"
+    body :photo => photo, :user => user, :host => host
   end
   
   def emailchange(user, oldemail)
