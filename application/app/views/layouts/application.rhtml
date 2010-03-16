@@ -10,14 +10,12 @@
 	<%= stylesheet_link_tag "admin" %>
 	<%= stylesheet_link_tag "content" %>
 	<%= stylesheet_link_tag "facebox" %>
+	<%= javascript_include_tag 'widget'%>
+	<%= javascript_include_tag 'http://static.ak.connect.facebook.com/connect.php/en_US'%>
 	<!--[if IE]>
 		<%= stylesheet_link_tag "ie" %>
 		<%= javascript_include_tag 'unitpngfix'%>
 	<![endif]-->
-    <%= javascript_include_tag 'jquery.min'%>
-	<%= javascript_include_tag 'facebox'%>
-	<%= javascript_include_tag 'application' %>
-	<%= javascript_include_tag 'prototype'%>
   </head>
   
   <body>
@@ -48,17 +46,6 @@
 	</div><!-- header -->
 	<div class="clear"></div>
 	<div id="container">
-	<div id="contentright">
-		<div id="search">
-			<%form_for :search, :url => { :action => "index", :controller => "search" } do |f|%>
-				<%=f.text_field :q, :class=>'searchbox', :size => '15', :value => params[:query]%>
-				<%= submit_tag 'Search', :class => 'searchbutton' %>
-			<%end%>
-		</div>	
-		<div id="rightbox">
-			<%= render :partial => 'site/sidebar'%>
-		</div>
-	</div><!-- contentright -->
 		<div id="content">
 			<% if flash[:notice] %>
 			   <div id="notice"><%= flash[:notice] %></div>
@@ -69,6 +56,17 @@
 			
 			<%= @content_for_layout %>
 		</div><!-- content -->
+		<div id="contentright">
+			<div id="search">
+				<%form_for :search, :url => { :action => "index", :controller => "search" } do |f|%>
+					<%=f.text_field :q, :class=>'searchbox', :size => '15', :value => params[:query]%>
+					<%= submit_tag 'Search', :class => 'searchbutton' %>
+				<%end%>
+			</div>	
+			<div id="rightbox">
+				<%= render :partial => 'site/sidebar'%>
+			</div>
+		</div><!-- contentright -->
 		<div class="clear"></div>
 		<div id="paginate">
 			<%=unless @paginate.nil? then will_paginate @paginate end%>
@@ -136,6 +134,11 @@
 	<%end%>
 	</div>
   </body>
+    <%= javascript_include_tag 'jquery.min'%>
+	<%= javascript_include_tag 'facebox'%>
+	<%= javascript_include_tag 'prototype'%>
+	<%= javascript_include_tag 'application' %>
+</head>
 </html>
 <% rtime = Time.now.to_f - starttime%>
  

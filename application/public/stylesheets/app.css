@@ -137,6 +137,10 @@ img {
 	*height:60px;
 	background-image:url('/images/topbar-right.gif');
 }
+#fbfan {
+	margin-top:12px;
+	text-align:center;
+}
 #bloghead {
 	margin-top: 12px;
 	padding:10px;
@@ -187,6 +191,7 @@ img {
 	background: #fff;
 }
 #content {
+	background:#fff;
 	float:left;
 	min-height:450px;
 	_height:450px;
@@ -197,6 +202,7 @@ img {
 	padding:10px;
 }
 #contentright{
+	background:#fff;
 	padding:10px;
 	width:300px;
 	float:right;
