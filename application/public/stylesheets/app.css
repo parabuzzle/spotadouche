@@ -1,11 +1,45 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
 body {
 	background-image:url('/images/back-stripe-red-bottom.png');
 	margin: 0px;
-	z-index:-2;
 	padding: 0px;
 	color: #333;
 	font-weight:bold;
 	font-family: helvetica;
+}
+
+h1 {
+	font-weight:bold;
+	font-size:32px;
+	margin-bottom: 14px;
+	margin-top:10px;
+}
+
+h2 {
+	font-weight:bold;
+	font-size:22px;
+	margin-bottom: 12px;
+}
+p {
+	margin-top:5px;
+	margin-bottom:5px;
 }
 
 a {
@@ -45,42 +79,61 @@ img {
 }
 #topback {
 	position: absolute;
-	z-index:-1;
+	top:0px;
+	left:0px;
+
 	width:100%;
 	background-repeat: repeat-x;
 	background-image:url('/images/back-stripe-red-top.png');
-	height: 606px;
+	height: 909px;
+	_height: 909px;
+	.height: 909px;
+	*height: 909px;
 }
 #main {
+	position: relative;
+	z-index:2;
 	width: 960px;
 	margin:auto;
 }
 #toppush {
-	padding-top: 20px;
+	padding-top: 36px;
 	text-align: center;
 	font-size: 32px;
 	height: 90px;
+	_height: 90px;
+	.height: 90px;
+	*height: 90px;
 }
 #logo {
 	position:absolute;
-	padding-top: 20px;
+	margin-top: 20px;
 	text-align: center;
 	font-size: 32px;
 }
 .topbar {
 	height:60px;
+	_height:60px;
+	.height:60px;
+	*height:60px;
 	background-image:url('/images/topbar.gif');
 }
 .topbar-left {
 	float:left;
 	width:31px;
 	height:60px;
+	_height:60px;
+	.height:60px;
+	*height:60px;
 	background-image:url('/images/topbar-left.gif');
 }
 .topbar-right {
 	float:right;
 	width:31px;
 	height:60px;
+	.height:60px;
+	_height:60px;
+	*height:60px;
 	background-image:url('/images/topbar-right.gif');
 }
 #nav {
@@ -95,6 +148,8 @@ img {
 	float:left;
 	min-height:450px;
 	_height:450px;
+	.height:450px;
+	*height:450px;
 	width:610px;
 	padding: 10px;
 }

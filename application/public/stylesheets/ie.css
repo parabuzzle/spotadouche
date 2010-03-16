@@ -1,0 +1,21 @@
+/*IE Cruft*/
+#topright {
+	position:absolute;
+	right:0;
+	background-image: url(/images/topbar.gif);
+	height: 60px;
+	margin: auto;
+	margin:0px;
+	padding:0px;
+}
+
+#topleft {
+	position:absolute;
+}
+
+#logo {
+	z-index:10;
+}
+#container {
+	margin-top:60px;
+}

@@ -5,8 +5,15 @@
     <title><%= @title %></title>
 	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 	<link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <%= stylesheet_link_tag "global" %>
+	<%= stylesheet_link_tag "app" %>
+    <%= stylesheet_link_tag "stars" %>
+	<%= stylesheet_link_tag "admin" %>
+	<%= stylesheet_link_tag "content" %>
 	<%= stylesheet_link_tag "facebox" %>
+	<!--[if IE]>
+		<%= stylesheet_link_tag "ie" %>
+		<%= javascript_include_tag 'unitpngfix'%>
+	<![endif]-->
     <%= javascript_include_tag 'jquery.min'%>
 	<%= javascript_include_tag 'facebox'%>
 	<%= javascript_include_tag 'application' %>
@@ -18,10 +25,10 @@
 	<div id ="main">
 	<div id="header">
 		<div id="logo">
-			<%=image_tag('logo-brass.png')%>
+			<%=image_tag('logo-brass.png', :class=>'unitPng')%>
 		</div> <!-- logo -->
 		<div id="toppush"></div>
-		<ul class="right">
+		<ul class="right" id="topright">
 			<%if logged_in?%>
 				<li class="right"><%=link_to "Logout", {:controller => 'users', :action => 'logout'}, :style=>"background-image:none;"%></li>
 				<li class="right"><%=link_to "Account", :controller => 'users', :action => 'index'%></li>
@@ -33,70 +40,25 @@
 				<li class="right"><%=link_to "Login", {:controller => 'users', :action => 'login'}, :rel => 'facebox'%></li>
 			<%end%>
 		</ul>
-		<ul class="top">
+		<ul class="top" id="topleft">
 		<li class="top"><%=link_to "Home", :controller => 'site', :action => 'index'%></li>
 		<li class="top"><%=link_to "Submit", :controller => 'photos', :action => 'new'%></li>
 		<li class="top"><%=link_to "About", {:controller => 'site', :action => 'about'}, :style=>"background-image:none;"%></li>
 		</ul>
 	</div><!-- header -->
 	<div class="clear"></div>
+	<div id="container">
 	<div id="contentright">
 		<div id="search">
 			<%form_for :search, :url => { :action => "index", :controller => "search" } do |f|%>
 				<%=f.text_field :q, :class=>'searchbox', :size => '15', :value => params[:query]%>
 				<%= submit_tag 'Search', :class => 'searchbutton' %>
 			<%end%>
-		</div>
+		</div>	
 		<div id="rightbox">
-			<div id="rcontent">
-				<script src="http://widgets.twimg.com/j/2/widget.js"></script>
-				<script>
-				new TWTR.Widget({
-				  version: 2,
-				  type: 'profile',
-				  rpp: 4,
-				  interval: 6000,
-				  width: 'auto',
-				  height: 300,
-				  theme: {
-				    shell: {
-				      background: '#333333',
-				      color: '#ffffff'
-				    },
-				    tweets: {
-				      background: '#700000',
-				      color: '#ffffff',
-				      links: '#707070'
-				    }
-				  },
-				  features: {
-				    scrollbar: false,
-				    loop: false,
-				    live: false,
-				    hashtags: true,
-				    timestamp: true,
-				    avatars: false,
-				    behavior: 'all'
-				  }
-				}).render().setUser('spotadouche').start();
-				</script>
-				<br/>
-				
-				<script type="text/javascript"><!--
-				google_ad_client = "pub-3575518988540294";
-				/* SAD-250-Side */
-				google_ad_slot = "7151127731";
-				google_ad_width = 250;
-				google_ad_height = 250;
-				//-->
-				</script>
-				<script type="text/javascript"
-				src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-				</script>
-			</div>
+			<%= render :partial => 'site/sidebar'%>
 		</div>
 	</div><!-- contentright -->
-	<div id="container">	
 		<div id="content">
 			<% if flash[:notice] %>
 			   <div id="notice"><%= flash[:notice] %></div>
