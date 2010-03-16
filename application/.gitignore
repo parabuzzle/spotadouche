@@ -2,6 +2,7 @@
 *.sqlite3
 *.pid
 *.out
+cache/*
 config/database.yml
 config/siteprops.yml
 config/facebooker.yml

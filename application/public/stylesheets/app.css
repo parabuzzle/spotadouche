@@ -37,6 +37,7 @@ h2 {
 	font-size:22px;
 	margin-bottom: 12px;
 }
+
 p {
 	margin-top:5px;
 	margin-bottom:5px;
@@ -136,6 +137,47 @@ img {
 	*height:60px;
 	background-image:url('/images/topbar-right.gif');
 }
+#bloghead {
+	margin-top: 12px;
+	padding:10px;
+	text-align:left;
+	background:#333333;
+	color:#ffffff;
+}
+#blogfoot, #blogfoot a{
+	background:#333333;
+	padding:6px;
+	color:#aaaaaa;
+}
+#blogrss {
+	font-size: 14px;
+	text-align:left;
+	padding:8px;
+	font-weight:none;
+	color:#ffffff;
+	border:1px solid #333333;
+	background: #700000;
+}
+.bloglink a {
+	color:#ffffff;
+	font-weight:bold;
+	font-size:16px;
+}
+.blogitem, .blogitem a {
+	font-size:12px;
+	margin-bottom: 10px;
+	color: #eeeeee;
+	margin-left:10px;
+}
+.sep {
+	border-top: 1px solid #ffffff;
+	padding:6px;
+}
+.blogdate {
+	font-size:10px;
+	color:#777777;
+}
+
 #nav {
 	padding-top:18px;
 }
@@ -289,6 +331,7 @@ ul.top a {
 
 #footerad {
 	width:100%;
+	margin:auto;
 	text-align:center;
 	margin-top:10px;
 	margin-bottom: 10px;

@@ -74,8 +74,7 @@
 			<%=unless @paginate.nil? then will_paginate @paginate end%>
 		</div>
 	</div> <!-- container-->
-	<% if ENV["RAILS_ENV"] == "production"%>
-			<div id="footerad">
+		<div id="footerad">
 			<script type="text/javascript"><!--
 			google_ad_client = "pub-3575518988540294";
 			/* SAD-Footer */
@@ -88,7 +87,6 @@
 			src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 			</script>
 		</div>
-	<%end%>
 	<div id="footer">
 		<div class="hdivf"></div>
 		<div id="footlinks"><a href="http://spotadouche.wordpress.com">Blog</a> | <%=link_to "Terms", :controller => "site", :action=>"terms"%> | <%=link_to "Privacy", :controller=>"site", :action=>"privacy"%></div>
