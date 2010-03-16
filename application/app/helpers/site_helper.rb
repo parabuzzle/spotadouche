@@ -5,7 +5,7 @@ module SiteHelper
     FileUtils.mkdir_p(cachedir) unless File.directory?(cachedir)
     file = "#{cachedir}/blog.yml"
     
-    if File.exist?(file) and File.mtime(file)>Time.now - 300 #cache for 5 minutes
+    if File.exist?(file) and File.mtime(file)>Time.now - 0 #cache for 5 minutes
       logger.debug "blog rss cache file is valid... using it"
       content = YAML::load(File.open(file))
     else
