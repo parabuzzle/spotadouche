@@ -33,6 +33,7 @@ class AdminController < ApplicationController
     @photo = Photo.find(params[:id])
     if request.post?
       @photo.status = params[:status].to_i
+      @photo.created_at = Time.now
       @photo.forceup = params[:forceup]
       save = @photo.save
       if save != true

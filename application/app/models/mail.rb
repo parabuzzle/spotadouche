@@ -15,7 +15,7 @@ class Mail < ActionMailer::Base
     subject "[Douche] New User - #{user.login}"
     from @@mail['from']
     content_type "text/html"
-    body :user => user, :footer => @footer
+    body :user => user, :footer => @@mail['footer']
   end
   
   def newphoto(photo, user, host="spotadouche.com")
