@@ -38,6 +38,31 @@ class Photo < ActiveRecord::Base
     end
   end
   
+  def votesup_percent
+    total = votesup.to_f+votesdown.to_f
+    p = votesup.to_f/total.to_f
+    return p.to_f*100
+  end
+  
+  def votesdown_percent
+    total = votesup.to_f+votesdown.to_f
+    p = votesdown.to_f/total.to_f 
+    return p.to_f*100
+  end
+  
+  def votes_total
+    return votesup+votesdown
+  end
+  
+  def vote_up!
+    self.votesup = self.votesup + 1
+    return self.save
+  end
+  def vote_down!
+    self.votesdown = self.votesdown + 1
+    return self.save
+  end
+  
   def terms_accepted
     if terms_acceptence != true
       unless forceup == 'true' then errors.add_to_base("You must accept the terms to upload your photo") end
