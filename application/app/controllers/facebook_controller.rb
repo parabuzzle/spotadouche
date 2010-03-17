@@ -1,9 +1,9 @@
 class FacebookController < ApplicationController
   def index
     @title = "Spot a Douche - Facebook"
-    @photo = Photo.find(:first, :order => 'RAND()', :conditions => "status >= 5")
-    #@photo = Photo.last
-    if request.post?
+    #@photo = Photo.find(:first, :order => 'RAND()', :conditions => "status >= 5")
+    @photo = Photo.last
+    if params[:vote] != nil
       if params[:vote] == "up"
         @photo.vote_up!
       elsif params[:vote] == "down"
