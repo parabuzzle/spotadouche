@@ -9,7 +9,7 @@ class FacebookController < ApplicationController
       elsif params[:vote] == "down"
         @photo.vote_down!
       end
-      @photo = Photo.find(params[:last]) unless params[:last].nil?
+      @last = Photo.find(params[:last]) unless params[:last].nil?
     end
     render :template => false
   end
