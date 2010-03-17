@@ -16,6 +16,10 @@ table, caption, tbody, tfoot, thead, tr, th, td {
     background: transparent;
 }
 
+ol {
+	margin-left:40px;
+}
+
 body {
 	background-image:url('/images/back-stripe-red-bottom.png');
 	margin: 0px;

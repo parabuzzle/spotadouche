@@ -8,9 +8,10 @@
 				<div id="votebuttons" style="margin:10px;">
 					<span id="upbutton"><%=link_to("<img src='#{SITE_PROPS['facebook']['basehost']}/images/douche-button.png' border='0px'/>", {:last => @photo.id, :vote =>'up', :controller=>"site"}, :method => :get)%></span> <span id="downbutton"><%=link_to("<img src='#{SITE_PROPS['facebook']['basehost']}/images/not-button.png' border='0px'/>", {:last => @photo.id, :vote =>'down',:controller => "site"}, :method => :get)%></span>
 				</div>
+				Much more Douche to be had at <a href="http://spotadouche.com" target="blank">spotadouche.com</a>
 			</div>
 		<%else%>
-				<h1>Douche or Not a Douche?</h1>
+				<h1 style="font-size:46px;font-weight:bold;padding:8px;">Douche or Not a Douche?</h1>
 				<div id="nest1" style="width:350px;margin:auto;">
 					<div id="thumb" style="float:left;">
 						<img src='<%= image_path(SITE_PROPS['facebook']['basehost'] + @last.public_filename(:thumb)) %>'/>
@@ -25,6 +26,7 @@
 					<div id="next" style="padding:10px;">
 						<%=link_to("<img src='#{SITE_PROPS['facebook']['basehost']}/images/next-button.png' border='0px'/>", :controller=>'site')%>
 					</div>
+					Much more Douche to be had at <a href="http://spotadouche.com" target="blank">spotadouche.com</a>
 				</div>
 		<%end%>
 		</div>

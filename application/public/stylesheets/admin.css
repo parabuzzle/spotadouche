@@ -29,3 +29,16 @@ legend {
 	border: 1px solid #333;
 	margin-bottom: 10px;
 }
+h3 {
+	font-size:26px;
+	padding:8px;
+}
+#terms {
+	padding-left:18px;
+	font-family:serif;
+}
+#privacy {
+	text-align:center;
+	padding-left:18px;
+	font-family:serif;
+}
