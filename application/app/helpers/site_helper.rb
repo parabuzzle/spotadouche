@@ -11,7 +11,12 @@ module SiteHelper
     else
       logger.debug "blog rss cache file is old... refreshing"
        # raw content of rss feed will be loaded here
-      open(blogrss) do |s| content = s.read end
+      open(blogrss) do |s| 
+        content = ""
+        while s.eof? != true 
+          content << s.read 
+        end
+      end
       f = File.new(file,"w")
       f.write(content)
     end
