@@ -18,7 +18,7 @@ class FacebookController < ApplicationController
   
   def facebook
     @title = "Spot a Douche - Welcome"
-    redirect_to "/"
+    redirect_to :controller => "site", :action => "index"
   end
     
 end
