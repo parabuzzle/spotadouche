@@ -36,10 +36,21 @@ class ApplicationController < ActionController::Base
     unless logged_in?
       session[:protected_page] = request.request_uri
       flash[:error] = "I'm sorry. You must be logged in to access that section of the site."
-      redirect_to :controller => "site", :action => "index"
+      #redirect_to :protected_page unless :protected_page.nil?
+      redirect_to :controller => "users", :action => "login"
       return false
     end
   end
+  
+  def redirect_to_forwarding_url
+    if (redirect_url = session[:protected_page])
+      session[:protected_page] = nil
+      redirect_to redirect_url
+    else
+      redirect_to :controller => 'users', :action => 'index'
+    end
+  end
+  
   # redirects in the typical case
   #before_filter :ensure_authenticated_to_facebook
   

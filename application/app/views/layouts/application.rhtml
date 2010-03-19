@@ -5,6 +5,7 @@
     <title><%= @title %></title>
 	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 	<link rel="icon" href="/favicon.ico" type="image/x-icon">
+	<%= auto_discovery_link_tag(:rss, {:action => "feed", :controller => "photos"}, {:title => "Photo Feed"}) %>
 	<%= stylesheet_link_tag "app" %>
     <%= stylesheet_link_tag "stars" %>
 	<%= stylesheet_link_tag "admin" %>
@@ -62,7 +63,7 @@
 					<%=f.text_field :q, :class=>'searchbox', :size => '15', :value => params[:query]%>
 					<%= submit_tag 'Search', :class => 'searchbutton' %>
 				<%end%>
-			</div>	
+			</div>
 			<div id="rightbox">
 				<%= render :partial => 'site/sidebar'%>
 			</div>

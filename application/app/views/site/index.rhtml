@@ -1,6 +1,6 @@
 <!-- <div id="socbuttons"><%=image_tag('rss.png')%></div> -->
 
-<h1>Douche Stream</h1>
+<h1><%=link_to(image_tag('rss.jpg'), :controller=>'photos', :action=>"feed")%> Douche Stream</h1>
 <div class="clear"></div>
 <%for photo in @photos%>
 	<div class="streamitem">
@@ -15,8 +15,6 @@
 		<div class="photo"><%= image_tag(photo.public_filename) %></div>
 		<div class="photodesc"><%=h photo.description%></div>
 		<div class="loc">Location: <%if photo.location.nil?%>Unknown<%else%><%=link_to h(photo.location), :action => 'index', :controller => 'search', :query => "location:#{photo.location}"%><%end%></div>
-		<div class="comcount"><%=link_to "Comments: #{photo.comments.count}", :controller => 'photos', :action => 'show', :id => photo.id%></div>
-		<div class="clear"></div>
 		<div class="userinfo">
 			<%if photo.anony == true %>
 				Uploaded by: Anonymous Coward via <%=h photo.via%>
@@ -24,13 +22,29 @@
 				Uploaded by: <%= link_to photo.user.login, :controller => 'users', :action => 'profile', :login => photo.user.login%> via <%=h photo.via%>
 			<%end%>
 		</div>
-		<div class="share">
-			<a href="http://www.facebook.com/sharer.php?u=http://<%=request.host %>/photo/<%=photo.id%>&t=<%=photo.title%>" target="blank"><img src="/images/facebook.gif" border="0px" alt="facebook"/></a> 
-			<a href="http://twitter.com/home?status=http://<%=request.host %>/photo/<%=photo.id%>" target="blank"><img src="/images/twitter.gif" border="0px" alt="twitter"/></a> 
-			<a href="http://www.myspace.com/Modules/PostTo/Pages/?u=http://<%=request.host %>/photo/<%=photo.id%>&t=<%=photo.title%>&c=<%=photo.description[0,140]%>[...]" target="blank"><img src="/images/myspace.png" border="0px" alt="myspace"/></a> 
-			<a href="http://digg.com/submit?phase=2&url=http://<%=request.host %>/photo/<%=photo.id%>&title=<%=photo.title%>&bodytext=<%=photo.description[0,140]%>[...]" target="blank"><img src="/images/digg.png" border="0px" alt="digg"/></a> 
-			<a href="http://delicious.com/post?url=http://<%=request.host %>/photo/<%=photo.id%>&title=<%=photo.title%>&title=<%=photo.title%>" target="blank"><img src="/images/delicious.png" border="0px" alt="delicious"/></a>
+		<% unless photo.comments.count < 1%>
+		<div class="comcount"><a href='#' onclick="jQuery('.comments-<%=photo.id%>').toggle();return false;">Comments: <%=photo.comments.count%></a></div>
+		<div class="clear"></div>
+		<div class="comments-<%=photo.id%>" style="padding-top:10px;padding-left:16px; display:none;">
+			<% for comment in photo.comments_prev do%>
+				<div class="coitop"></div>
+				<div class="coimid"><%=h comment.data%></div>
+				<div class="coibot"></div>
+				<div class="commenter">By: <%=link_to h(comment.user.login), :action => "profile", :controller => "users", :login=>comment.user.login%> <span class="small"><%=reldate comment.created_at%></span></div>
+			<%end%>
+			
+				<div class="right"><%= link_to "[read more comments]", "photos/show/#{photo.id}#comments"%></div>
 		</div>
+		<%else%>
+			<%=link_to "Comments: #{photo.comments.count}", :controller=>"photos", :action=>"show", :id=>photo.id%>
+		<%end%>
+		<div class="share">
+			<a href="http://www.facebook.com/sharer.php?u=http://<%=request.host %>/photo/<%=photo.id%>&t=<%=photo.title%>" target="blank"><img src="/images/fb.jpg" border="0px" alt="facebook"/></a> 
+			<a href="http://twitter.com/home?status=http://<%=request.host %>/photo/<%=photo.id%>" target="blank"><img src="/images/tweet.jpg" border="0px" alt="twitter"/></a> 
+			<a href="http://delicious.com/post?url=http://<%=request.host %>/photo/<%=photo.id%>&title=<%=photo.title%>&title=<%=photo.title%>" target="blank"><img src="/images/del.jpg" border="0px" alt="delicious"/></a>
+		</div>
+		
+		
 		<% if logged_in? and admin? %>
 		<div class="admindata">
 			Admin Stuff

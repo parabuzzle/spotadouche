@@ -63,6 +63,10 @@ class Photo < ActiveRecord::Base
     return self.save
   end
   
+  def comments_prev
+    return Comment.find(:all, :limit=>5, :conditions => {:deleted => false, :photo_id => self.id})
+  end
+  
   def terms_accepted
     if terms_acceptence != true
       unless forceup == 'true' then errors.add_to_base("You must accept the terms to upload your photo") end

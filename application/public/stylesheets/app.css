@@ -67,6 +67,9 @@ img {
 .medium {
 	font-size: 14px;
 }
+.right {
+	text-align:right;
+}
 #notice{
 	background: #CCF;
 	padding:10px;

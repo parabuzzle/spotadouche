@@ -35,7 +35,8 @@ class UsersController < ApplicationController
         self.current_user.remember_me
         cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
       end
-      redirect_back_or_default(:controller => '/users', :action => 'index')
+      redirect_to_forwarding_url
+      #redirect_back_or_default(:controller => '/users', :action => 'index')
       flash[:notice] = "You have been logged in. Welcome back"
     end
   end
@@ -129,7 +130,6 @@ class UsersController < ApplicationController
   end
   
   private 
-  
   def protect_sensitive
     user = User.find(session[:user])
     if user.id == params[:id].to_i || user.admin

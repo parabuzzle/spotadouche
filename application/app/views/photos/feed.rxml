@@ -1,0 +1,18 @@
+xml.instruct! :xml, :version=>"1.0" 
+xml.rss(:version=>"2.0"){
+  xml.channel{
+    xml.title("Spot a Douche - Photo Stream")
+    xml.link("http://spotadouche.com/")
+    xml.description("A feed of Douche Photos")
+    xml.language('en-us')
+      for photo in @photos
+        xml.item do
+          xml.title(photo.title)
+          xml.description("<img src='#{SITE_PROPS['feed']['host']}#{photo.public_filename}'/><br/>#{photo.description}")             
+          xml.pubDate(photo.created_at.strftime("%a, %d %b %Y %H:%M:%S %z"))
+          xml.link("#{SITE_PROPS['feed']['host']}/photo/#{photo.id}")
+          xml.guid("#{SITE_PROPS['feed']['host']}/photo/#{photo.id}")
+        end
+      end
+  }
+}

@@ -21,11 +21,9 @@
 		<%end%>
 	</div>
 	<div class="share">
-		<a href="http://www.facebook.com/sharer.php?u=http://<%=request.host %>/photo/<%=@photo.id%>&t=<%=@photo.title%>" target="blank"><img src="/images/facebook.gif" border="0px" alt="facebook"/></a> 
-		<a href="http://twitter.com/home?status=http://<%=request.host %>/photo/<%=@photo.id%>" target="blank"><img src="/images/twitter.gif" border="0px" alt="twitter"/></a> 
-		<a href="http://www.myspace.com/Modules/PostTo/Pages/?u=http://<%=request.host %>/photo/<%=@photo.id%>&t=<%=@photo.title%>&c=<%=@photo.description[0,140]%>[...]" target="blank"><img src="/images/myspace.png" border="0px" alt="myspace"/></a> 
-		<a href="http://digg.com/submit?phase=2&url=http://<%=request.host %>/photo/<%=@photo.id%>&title=<%=@photo.title%>&bodytext=<%=@photo.description[0,140]%>[...]" target="blank"><img src="/images/digg.png" border="0px" alt="digg"/></a> 
-		<a href="http://delicious.com/post?url=http://<%=request.host %>/photo/<%=@photo.id%>&title=<%=@photo.title%>&title=<%=@photo.title%>" target="blank"><img src="/images/delicious.png" border="0px" alt="delicious"/></a>
+		<a href="http://www.facebook.com/sharer.php?u=http://<%=request.host %>/photo/<%=@photo.id%>&t=<%=@photo.title%>" target="blank"><img src="/images/fb.jpg" border="0px" alt="facebook"/></a> 
+		<a href="http://twitter.com/home?status=http://<%=request.host %>/photo/<%=@photo.id%>" target="blank"><img src="/images/tweet.jpg" border="0px" alt="twitter"/></a> 
+		<a href="http://delicious.com/post?url=http://<%=request.host %>/photo/<%=@photo.id%>&title=<%=@photo.title%>&title=<%=@photo.title%>" target="blank"><img src="/images/del.jpg" border="0px" alt="delicious"/></a>
 	</div>
 	<div id="comments">
 		<h3>Comments</h3>
@@ -36,10 +34,15 @@
 			<div class="commenter">By: <%=link_to h(comment.user.login), :action => "profile", :controller => "users", :login=>comment.user.login%> <span class="small"><%=reldate comment.created_at%></span></div>
 		<%end%>
 		<%= will_paginate @comments %>
-		<% form_for :comment, :url => { :action => "new", :controller => "comments", :photoid => @photo.id } do |f|%>
-		<p><label for="data">Leave a Comment:</label><br/></p>
-		<%= f.text_area :data, :size => '70x5' %></p>
-		<p><%= submit_tag 'Comment' %></p>
+		<%if logged_in?%>
+			<% form_for :comment, :url => { :action => "new", :controller => "comments", :photoid => @photo.id } do |f|%>
+			<p><label for="data">Leave a Comment:</label><br/></p>
+			<%= f.text_area :data, :size => '70x5' %></p>
+			<p><%= submit_tag 'Comment' %></p>
+			<%end%>
+		<%else%>
+			<%session[:protected_page] = request.request_uri + '#comments'%>
+			<%=link_to "Login", {:controller=>"users", :action=>"login"}, :rel=>"facebox"%> to leave comments
 		<%end%>
 	</div>
 	<% if logged_in? and admin? %>

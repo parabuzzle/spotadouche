@@ -42,6 +42,11 @@ class PhotosController < ApplicationController
     end
   end
   
+  def feed
+    @photos = Photo.find(:all, :limit => 10, :order => "created_at DESC", :conditions => "status >=5 ")
+    render :template => false
+  end
+  
   private
   
   def protect_sensitive
