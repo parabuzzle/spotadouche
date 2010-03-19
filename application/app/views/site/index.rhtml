@@ -34,10 +34,31 @@
 			<%end%>
 			
 				<div class="right"><%= link_to "[read more comments]", "photos/show/#{photo.id}#comments"%></div>
+				<%if logged_in?%>
+					<% form_for :comment, :url => { :action => "new", :controller => "comments", :photoid => photo.id } do |f|%>
+					<p><label for="data">Leave a Comment:</label><br/></p>
+					<%= f.text_area :data, :size => '70x5' %></p>
+					<p><%= submit_tag 'Comment' %></p>
+					<%end%>
+				<%else%>
+					<%=link_to "Login", {:controller=>"users", :action=>"login", :back=>request.request_uri}, :rel=>"facebox"%> to leave comments
+				<%end%>
 		</div>
 		<%else%>
-			<%=link_to "Comments: #{photo.comments.count}", :controller=>"photos", :action=>"show", :id=>photo.id%>
+			<div class="comcount"><a href='#' onclick="jQuery('.comments-<%=photo.id%>').toggle();return false;">Comments: <%=photo.comments.count%></a></div>
+		<div class="comments-<%=photo.id%>" style="padding-top:10px;padding-left:16px; display:none;">
+			<%if logged_in?%>
+				<% form_for :comment, :url => { :action => "new", :controller => "comments", :photoid => photo.id } do |f|%>
+				<p><label for="data">Leave a Comment:</label><br/></p>
+				<%= f.text_area :data, :size => '70x5' %></p>
+				<p><%= submit_tag 'Comment' %></p>
+				<%end%>
+			<%else%>
+				<%=link_to "Login", {:controller=>"users", :action=>"login", :back=>request.request_uri}, :rel=>"facebox"%> to leave comments
+			<%end%>
+		</div>
 		<%end%>
+		
 		<div class="share">
 			<a href="http://www.facebook.com/sharer.php?u=http://<%=request.host %>/photo/<%=photo.id%>&t=<%=photo.title%>" target="blank"><img src="/images/fb.jpg" border="0px" alt="facebook"/></a> 
 			<a href="http://twitter.com/home?status=http://<%=request.host %>/photo/<%=photo.id%>" target="blank"><img src="/images/tweet.jpg" border="0px" alt="twitter"/></a> 

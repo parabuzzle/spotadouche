@@ -8,11 +8,12 @@ class ApplicationController < ActionController::Base
   include AuthenticatedSystem
   #Make a tracking cookie
   before_filter :ensure_tracking_cookie, :except => [:status]
+  before_filter :page_tracker, :except => [:status]
   before_filter :login_from_cookie
   
   # Load facebook session data
-  #before_filter :create_facebook_session
-  #helper_method :facebook_session
+  before_filter :create_facebook_session
+  helper_method :facebook_session
   #before_filter :guarantee_facebook_session
   
   #load cookies in to helpers
@@ -20,6 +21,10 @@ class ApplicationController < ActionController::Base
   
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
+  
+  def page_tracker
+    session[:current_page] = request.request_uri
+  end
   
   # Sets a tracking cookie
   def ensure_tracking_cookie
@@ -47,12 +52,12 @@ class ApplicationController < ActionController::Base
       session[:protected_page] = nil
       redirect_to redirect_url
     else
-      redirect_to :controller => 'users', :action => 'index'
+      redirect_to :controller => 'site', :action => 'index'
     end
   end
   
   # redirects in the typical case
-  #before_filter :ensure_authenticated_to_facebook
+  # before_filter :ensure_authenticated_to_facebook
   
   #def guarantee_facebook_session
   #  begin

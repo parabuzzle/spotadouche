@@ -85,6 +85,14 @@ img {
 	margin:auto;
 	border: 1px solid #333;
 }
+#blast{
+	background: #ffff55;
+	padding:10px;
+	width:575px;
+	margin:auto;
+	margin-bottom: 10px;
+	border: 1px solid red;
+}
 #topback {
 	position: absolute;
 	top:0px;

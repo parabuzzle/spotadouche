@@ -64,7 +64,7 @@ class Photo < ActiveRecord::Base
   end
   
   def comments_prev
-    return Comment.find(:all, :limit=>5, :conditions => {:deleted => false, :photo_id => self.id})
+    return Comment.find(:all, :limit=>2, :order => "created_at DESC", :conditions => {:deleted => false, :photo_id => self.id})
   end
   
   def terms_accepted

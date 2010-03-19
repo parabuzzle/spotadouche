@@ -46,8 +46,15 @@
 		</ul>
 	</div><!-- header -->
 	<div class="clear"></div>
+	
 	<div id="container">
 		<div id="content">
+			<% unless SITE_PROPS['admin']['blast']['msg'].nil?%>
+				<div id="blast">
+					<%=SITE_PROPS['admin']['blast']['msg']%>
+					<!-- <div class="right">Close <%=image_tag('close.png')%></div> -->
+				</div>
+			<%end%>
 			<% if flash[:notice] %>
 			   <div id="notice"><%= flash[:notice] %></div>
 			<% end %>
@@ -58,6 +65,8 @@
 			<%= @content_for_layout %>
 		</div><!-- content -->
 		<div id="contentright">
+			<!-- <div class="right"><fb:login-button v="2" size="medium" onlogin="window.location.reload(true);">Login with Facebook</fb:login-button></div>
+			<br/> -->
 			<div id="search">
 				<%form_for :search, :url => { :action => "index", :controller => "search" } do |f|%>
 					<%=f.text_field :q, :class=>'searchbox', :size => '15', :value => params[:query]%>
@@ -135,6 +144,7 @@
 	<%end%>
 	</div>
   </body>
+	<!-- <%= facebook_connect_init %>-->
     <%= javascript_include_tag 'jquery.min'%>
 	<%= javascript_include_tag 'facebox'%>
 	<%= javascript_include_tag 'prototype'%>

@@ -1,6 +1,6 @@
 <div class="star-rating-message">
 <% if logged_in?%>
-	Rating Submitted
+	Rating Submitted <%= render :partial => "ratings/rate", :locals => { :photo => @photo } %>	
 <% else %>
 	You must be logged in to vote
 <%end%>
