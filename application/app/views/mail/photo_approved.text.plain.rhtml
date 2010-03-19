@@ -1,0 +1,11 @@
+Hello <%=@photo.user.login%>,
+
+	Great news! Your photo has been approved! You can you view your photo here:
+	
+		<a href="http://<%=@host%>/photo/<%=@photo.id%>">http://<%=@host%>/photo/<%=@photo.id%></a>
+	
+	Sincerly,
+	Spot a Douche
+	
+---	
+<%=@footer['plain']%>

@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title>Photo Approved</title>
+	</head>
+	<body>
+		<div id="back" style="background:#700000; padding:10px">
+			<div id="main" style="font-size:20px; background:#ffffff; padding:6px; border:1px solid #333">
+		
+				<div id="start" style="font-weight:bold;">Hello <%=@photo.user.login%>,</div>
+		
+				
+		
+					<div id="body" style="padding:16px;">
+		
+						Great news! Your photo has been approved! You can you view your photo here:
+		
+						<div id="beta" style="padding-left:20px; margin-top: 20px; font-weight:bold; font-size:15px;">
+							<a href="http://<%=@host%>/photo/<%=@photo.id%>">http://<%=@host%>/photo/<%=@photo.id%></a>
+						</div>
+						<div id="sin" style="font-weight:bold; margin-top:20px;">Sincerly,</div>
+						<div id="sig" style="font-size:16px; padding-left:6px;">Spot a Douche</div>
+					</div>
+					<div id="tag" style="font-size:14px; font-weight:bold;"><a style="text-decoration:none;"href="http://spotadouche.com">spotadouche.com</a></div>
+					<div id="footer" style="border-top:2px solid #333; font-size:14px; padding-left: 10px; padding-top:2px;">
+						<%=@footer['html']%>
+					</div>
+		
+			</div>
+		</div>
+	</body>
+</html>

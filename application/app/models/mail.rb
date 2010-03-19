@@ -18,12 +18,20 @@ class Mail < ActionMailer::Base
     body :user => user, :footer => @@mail['footer']
   end
   
+  def photo_approved(photo)
+    recipients photo.user.email
+    subject "Photo Approved"
+    from @@mail['from']
+    content_type "text/html"
+    body :photo => photo, :footer => @@mail['footer'], :host => @@mail['host']
+  end
+  
   def newphoto(photo, user, host="spotadouche.com")
     recipients @@mail['admins']
     subject "[Douche] There is a new photo"
     from @@mail['from']
     content_type "text/html"
-    body :photo => photo, :user => user, :host => host, :footer =>@@mail['footer']
+    body :photo => photo, :user => user, :host => @@mail['host'], :footer =>@@mail['footer']
   end
   
   def emailchange(user, oldemail)
