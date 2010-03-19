@@ -15,4 +15,10 @@ class FacebookController < ApplicationController
     end
     render :template => false
   end
+  
+  def facebook
+    @title = "Spot a Douche - Welcome"
+    redirect_to "/"
+  end
+    
 end
