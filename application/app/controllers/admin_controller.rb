@@ -1,6 +1,6 @@
 class AdminController < ApplicationController
   
-  before_filter :protect
+  before_filter :protect, :except => [:status]
   @@defaultpp = 10
   
   def index
@@ -69,6 +69,10 @@ class AdminController < ApplicationController
         flash[:error] = "Error updating user"
       end
     end
+  end
+  
+  def status
+    render :template => false
   end
   
   

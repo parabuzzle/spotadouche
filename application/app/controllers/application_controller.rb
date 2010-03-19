@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
   #Make a tracking cookie
-  before_filter :ensure_tracking_cookie
+  before_filter :ensure_tracking_cookie, :except => [:status]
   before_filter :login_from_cookie
   
   # Load facebook session data
@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   # Sets a tracking cookie
   def ensure_tracking_cookie
     cookie_expiration = 10.years.from_now
-    version = 'v1'
+    version = 'v2'
     if cookies[:b].nil?
       logger.info("no tracking cookie found. setting cookie.")
       data = "#{version}%%tagged"
