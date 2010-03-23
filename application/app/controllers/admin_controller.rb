@@ -40,7 +40,7 @@ class AdminController < ApplicationController
         flash[:error] = "there were errors updating the status<br/>System says: #{@photo.errors.full_messages}<br/>You may want to force delete this photo"
       else
         @photo.reload
-        Mail.deliver_photo_approved(@photo)
+        Mail.deliver_photo_approved(@photo) unless @user.bouncing?
         if params[:forceup] == true
           flash[:error] = "Photo has been force updated..."
         end

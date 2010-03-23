@@ -35,7 +35,11 @@ class Mail < ActionMailer::Base
   end
   
   def emailchange(user, oldemail)
-    recipients [user.email, oldemail]
+    if user.bouncing?
+      recipients [user.email]
+    else
+      recipients [user.email, oldemail]
+    end
     subject "Your email has been changed"
     from @@mail['from']
     content_type "text/html"

@@ -34,7 +34,7 @@ class PhotosController < ApplicationController
     @photo = @user.photos.new(params[:photo])
     @photo.ip = request.remote_ip
     if @photo.save
-      Mail.deliver_newphoto(@photo, @user, request.host)
+      Mail.deliver_newphoto(@photo, @user, request.host) unless @user.bouncing?
       flash[:notice] = 'Your photo has been submitted for approval. It should be available shortly.'
       redirect_to :controller => 'site', :action => 'index'    
     else

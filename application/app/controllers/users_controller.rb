@@ -64,7 +64,11 @@ class UsersController < ApplicationController
     return unless @user.update_attributes(params[:user])
     return unless @pref.update_attributes(params[:pref])
     self.current_user = @user
-    if oldemail != nil then Mail.deliver_emailchange(@user, oldemail)end
+    if oldemail != nil
+      @user.bouncing = false
+      @user.save
+      Mail.deliver_emailchange(@user, oldemail) 
+    end
     redirect_back_or_default(:controller => '/users', :action => 'index')
     flash[:notice] = "Updated User Settings"
   rescue ActiveRecord::RecordInvalid

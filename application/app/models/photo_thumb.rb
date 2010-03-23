@@ -6,4 +6,8 @@ class PhotoThumb < ActiveRecord::Base
 
   validates_as_attachment
   
+  def watermark
+    return "75button.png"
+  end
+  
 end

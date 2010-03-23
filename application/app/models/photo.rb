@@ -22,6 +22,14 @@ class Photo < ActiveRecord::Base
   validates_presence_of :description
   validate :terms_accepted
   
+  after_attachment_saved :watermark
+  
+  def watermark
+    File.copy(self.full_filename, self.full_filename + '.org')
+    mark = Magick::ImageList.new(RAILS_ROOT + '/public/images/' + 'wmark.png')[0]
+    Magick::ImageList.new(self.full_filename)[0].watermark(mark, 0.50, 1, Magick::SouthEastGravity).write(self.full_filename)
+  end
+  
   def loc
     if location.nil? || location.empty?
       return "Unknown"
