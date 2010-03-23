@@ -25,8 +25,8 @@ class AdminController < ApplicationController
   
   def pending
     @title = "Spot a Douche - Photo Moderation"
-    unless params[:pp] then @defaultpp = 10 else pp = params[:pp] end
-    @pending = Photo.paginate :page => params[:page], :order => 'created_at DESC', :conditions => "status = 0", :per_page => pp
+    unless params[:pp] then pp = 10 else pp = params[:pp] end
+    @pending = Photo.paginate :page => params[:page], :conditions => "status = 0", :per_page => pp
   end
   
   def updatestatus
@@ -36,11 +36,16 @@ class AdminController < ApplicationController
       @photo.created_at = Time.now
       @photo.forceup = params[:forceup]
       save = @photo.save
+      if @photo.status >= 5
+        @photo.user.add_points(User::POINTS_PHOTO_APPROVED)
+        Mail.deliver_photo_approved(@photo) unless @photo.user.bouncing?
+      else
+        @photo.user.rm_points(User::POINTS_PHOTO_REJECTED)
+      end
       if save != true
         flash[:error] = "there were errors updating the status<br/>System says: #{@photo.errors.full_messages}<br/>You may want to force delete this photo"
       else
         @photo.reload
-        Mail.deliver_photo_approved(@photo) unless @user.bouncing?
         if params[:forceup] == true
           flash[:error] = "Photo has been force updated..."
         end
@@ -56,7 +61,7 @@ class AdminController < ApplicationController
       @user.save
       redirect_to :action => "users"
     else
-      unless params[:pp] then @@defaultpp = 10 else pp = params[:pp] end
+      unless params[:pp] then pp = 10 else pp = params[:pp] end
       @users = User.paginate :page => params[:page], :order => 'id', :per_page => pp
     end
   end

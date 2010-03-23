@@ -25,6 +25,26 @@ class User < ActiveRecord::Base
     Mail.deliver_reset_password(self) if self.recently_reset_password?
   end
 
+  POINTS_NEW_PHOTO = 10
+  POINTS_PHOTO_APPROVED = 100
+  POINTS_PHOTO_REJECTED = 10
+  POINTS_PROFILE_COMPLETE = 10
+  POINTS_DAILY_DOUCHE = 30
+  POINTS_RATING = 2
+  POINTS_COMMENT = 5
+  POINTS_DOND = 1
+  POINTS_IPHONE_APP = 10
+  POINTS_LINKING_FB = 30
+  
+  def add_points(num)
+    self.score = self.score + num
+    return self.save
+  end
+  
+  def rm_points(num)
+    self.score = self.score - num
+    return self.save
+  end
   
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   def self.authenticate(login, password)

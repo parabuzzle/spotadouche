@@ -2,25 +2,17 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
-		<title>Email Change</title>
+		<title>New Comment</title>
 	</head>
 	<body>
 		<div id="back" style="background:#700000; padding:10px">
 			<div id="main" style="font-size:20px; background:#ffffff; padding:6px; border:1px solid #333">
 		
-				<div id="start" style="font-weight:bold;">Hello <%=@user.login%>,</div>
-		
-				
-		
+				<div id="start" style="font-weight:bold;">Hello <%=@login%>,</div>
 					<div id="body" style="padding:16px;">
 		
-					We are sending you this email to confirm that your email has been updated on the site. If this is intentional there is nothing you need to do, you can delete this email. If you didn't change your email address on the site and have received this message, please contact us immediately by replying to this email or sending an email to <a href="mailto:admins@spotadouche.com">admin@spotadouche.com</a><br/><br/>
-					Old Email: <%=@oldemail%><br/>
-					New Email: <%=@user.email%>
-		
-						<div id="beta" style="background:#CCCCFF; border: 1px solid #aaaaaa; padding:4px; margin-top: 20px; font-weight:bold; font-size:15px">
-							We have sent a copy of this email to your old email address aswell.
-						</div>
+						This is a notification to let you know that there has been a new comment added to the photo <a href='http://<%=@host%>/photo/<%=@photo.id%>#comments'><%=@photo.title%></a>
+						
 						<div id="sin" style="font-weight:bold; margin-top:20px;">Sincerly,</div>
 						<div id="sig" style="font-size:16px; padding-left:6px;">Spot a Douche</div>
 					</div>

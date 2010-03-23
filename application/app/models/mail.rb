@@ -34,6 +34,14 @@ class Mail < ActionMailer::Base
     body :photo => photo, :user => user, :host => @@mail['host'], :footer =>@@mail['footer']
   end
   
+  def new_comment(photo)
+    recipients photo.user.email
+    subject "Someone commented on your photo"
+    from @@mail['from']
+    content_type "text/html"
+    body :photo => photo, :user => photo.user, :host => @@mail['host'], :footer => @@mail['footer']
+  end
+  
   def emailchange(user, oldemail)
     if user.bouncing?
       recipients [user.email]
@@ -61,5 +69,7 @@ class Mail < ActionMailer::Base
     content_type "text/html"
     body :user => user, :footer => @@mail['footer']
   end
-
+  
 end
+
+

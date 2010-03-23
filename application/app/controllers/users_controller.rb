@@ -60,7 +60,7 @@ class UsersController < ApplicationController
     @user = User.find(id)
     @pref = @user.pref
     return unless request.post?
-    if params[:user][:email] != @user.email then oldemail = @user.email end
+    unless params[:user][:email].nil? then; if params[:user][:email] != @user.email then oldemail = @user.email end; end
     return unless @user.update_attributes(params[:user])
     return unless @pref.update_attributes(params[:pref])
     self.current_user = @user
