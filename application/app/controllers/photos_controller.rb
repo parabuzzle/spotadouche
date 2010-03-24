@@ -21,7 +21,12 @@ class PhotosController < ApplicationController
     end
   end
   def show
-    @photo = Photo.find(params[:id])
+    if params[:random] == 'true' and params[:id].nil?
+      @photo = Photo.find(:first, :order => 'RAND()', :conditions => "status >= 5")
+      redirect_to :id => @photo.id
+    else
+      @photo = Photo.find(params[:id])
+    end
     @user = @photo.user
     unless params[:pp] then @@defaultpp = 10 else pp = params[:pp] end
     @comments = @photo.comments.paginate :page => params[:page], :order => 'created_at DESC', :per_page => pp

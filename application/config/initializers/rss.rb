@@ -4,7 +4,7 @@ require 'rss/2.0'
 class RSS::Rss
   def to_html
     max_description_length = 150
-    max = 4
+    max = 3
     html = ""
     a = 0
     channel.items.each do |i|

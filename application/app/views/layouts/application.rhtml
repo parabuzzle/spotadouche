@@ -40,9 +40,10 @@
 			<%end%>
 		</ul>
 		<ul class="top" id="topleft">
-		<li class="top"><%=link_to "Home", :controller => 'site', :action => 'index'%></li>
-		<li class="top"><%=link_to "Submit", :controller => 'photos', :action => 'new'%></li>
-		<li class="top"><%=link_to "About", {:controller => 'site', :action => 'about'}, :style=>"background-image:none;"%></li>
+			<li class="top"><%=link_to "Home", :controller => 'site', :action => 'index'%></li>
+			<li class="top"><%=link_to "Submit", :controller => 'photos', :action => 'new'%></li>
+			<li class="top"><%=link_to "Random Douche", {:controller => 'photos', :action => 'show', :id=>nil, :random => 'true'}%></li>
+			<li class="top"><%=link_to "About", {:controller => 'site', :action => 'about'}, :style=>"background-image:none;"%></li>
 		</ul>
 	</div><!-- header -->
 	<div class="clear"></div>

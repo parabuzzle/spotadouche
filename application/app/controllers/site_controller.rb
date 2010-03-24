@@ -4,7 +4,7 @@ class SiteController < ApplicationController
   def index
     @title = "Spot a Douche"
     #@photos = Photo.find(:all, :order=> 'created_at desc', :conditions => "status >= 5")
-    @photos = Photo.paginate :page => params[:page], :order => 'created_at DESC', :conditions => "status >= 5", :per_page => 5
+    @photos = Photo.paginate :page => params[:page], :order => 'created_at DESC', :conditions => "status >= 5", :per_page => 4
     @paginate = @photos
   end
   def about

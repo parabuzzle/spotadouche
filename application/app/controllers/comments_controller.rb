@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
       unless session[:user].nil?
         c.user_id = session[:user]
         c.save
-        @user.find(c.user_id).add_points(User::POINTS_COMMENT)
+        User.find(session[:user]).add_points(User::POINTS_COMMENT)
         Mail.deliver_new_comment(@photo) unless @photo.user.bouncing?
       end
       redirect_to :action => "show", :controller => 'photos', :id => params[:photoid]
