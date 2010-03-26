@@ -130,6 +130,13 @@
     <!-- end Dev mode only stuff -->
     <% end %>
 	
+	</div>
+	<!-- javascript -->
+	<!-- <%= facebook_connect_init %>-->
+    <%= javascript_include_tag 'jquery.min'%>
+	<%= javascript_include_tag 'facebox'%>
+	<%= javascript_include_tag 'prototype'%>
+	<%= javascript_include_tag 'application' %>
 	<!-- Analytics -->
 	<% if ENV["RAILS_ENV"] == "production"%>
 		<script type="text/javascript">
@@ -142,15 +149,23 @@
 		pageTracker._setDomainName(".spotadouche.com");
 		pageTracker._trackPageview();
 		} catch(err) {}</script>
+		
+		<!-- Yahoo! Web Analytics - All rights reserved -->
+		<script type="text/javascript" src="http://d.yimg.com/mi/ywa.js"></script>
+		<script type="text/javascript">
+		/*globals YWA*/
+		var YWATracker = YWA.getTracker("1000380107312");
+		/*
+		YWATracker.setDocumentName("");
+		YWATracker.setDocumentGroup("");
+		*/
+		YWATracker.submit();
+		</script>
+		<noscript>
+		<div><img src="http://a.analytics.yahoo.com/p.pl?a=1000380107312&amp;js=no" width="1" height="1" alt="" /></div>
+		</noscript>
 	<%end%>
-	</div>
   </body>
-	<!-- <%= facebook_connect_init %>-->
-    <%= javascript_include_tag 'jquery.min'%>
-	<%= javascript_include_tag 'facebox'%>
-	<%= javascript_include_tag 'prototype'%>
-	<%= javascript_include_tag 'application' %>
-</head>
 </html>
 <% rtime = Time.now.to_f - starttime%>
  

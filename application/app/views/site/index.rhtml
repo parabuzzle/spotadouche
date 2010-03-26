@@ -2,6 +2,7 @@
 
 <h1><%=link_to(image_tag('rss.jpg'), :controller=>'photos', :action=>"feed")%> Douche Stream</h1>
 <div class="clear"></div>
+<%=will_paginate @paginate%>
 <%for photo in @photos%>
 	<div class="streamitem">
 		<div class="date"><!-- Uploaded <%=reldate photo.created_at%>--> <%=photo.created_at.to_s(:pretty)%></div>
