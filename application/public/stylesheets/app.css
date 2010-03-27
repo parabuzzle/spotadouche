@@ -70,6 +70,12 @@ img {
 .right {
 	text-align:right;
 }
+.fright {
+	float:right;
+}
+.fleft {
+	float:left;
+}
 #notice{
 	background: #CCF;
 	padding:10px;

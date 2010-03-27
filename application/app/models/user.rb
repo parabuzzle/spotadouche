@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   has_many :photos
   has_one :pref
   has_many :comments
+  has_one :badge
+  has_one :avatar
   
   
   # Virtual attribute for the unencrypted password
@@ -18,7 +20,7 @@ class User < ActiveRecord::Base
   validates_length_of       :email,    :within => 3..100
   validates_uniqueness_of   :login, :email, :case_sensitive => false
   before_save :encrypt_password
-  after_create :build_pref
+  after_create :build_pref, :build_badge
   
   def after_save
     Mail.deliver_forgot_password(self) if self.recently_forgot_password?
@@ -35,6 +37,7 @@ class User < ActiveRecord::Base
   POINTS_DOND = 1
   POINTS_IPHONE_APP = 10
   POINTS_LINKING_FB = 30
+  POINTS_AVATAR = 2
   
   def add_points(num)
     self.score = self.score + num

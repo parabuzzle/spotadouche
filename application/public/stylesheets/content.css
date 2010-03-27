@@ -42,6 +42,7 @@
 }
 #userstats {
 	padding:4px;
+	padding-left: 20px;
 }
 .item {
 	margin-left:4px;
@@ -51,7 +52,7 @@
 	font-size:22px;
 }
 #dashavatar {
-	margin-left: 145px;
+	text-align: center;
 }
 .about {
 	margin-left:4px;
@@ -94,4 +95,60 @@
 }
 .scomment {
 	font-size: 14px;
+}
+.aboxtop {
+	background-image: url('/images/aboutboxtop.png');
+	background-repeat: no-repeat;
+	background-position:right top;
+	height:23px;
+	width: 373px;
+}
+.abox {
+	background-image: url('/images/aboutboxmid.png');
+	width:373px;
+	background-repeat: repeat-y;
+	background-position:right top;
+}
+.aboxbottom {
+	background-image: url('/images/aboutboxbottom.png');
+	background-repeat: no-repeat;
+	background-position:right top;
+	width:373px;
+	height:11px;
+}
+.profabout {
+	padding-left: 40px;
+	padding-right: 20px;
+}
+.profleft {
+	float:left;
+	width: 160px;
+}
+.profright {
+	float:right;
+	width: 400px;
+	text-align:left;
+}
+#uphotos {
+	border-bottom: 3px #333333 solid;
+	padding-top: 20px;
+}
+
+.badgehead {
+	border-bottom: solid 2px #333333;
+}
+
+#badges {
+	margin-top: 14px;
+	padding: 6px;
+	border: solid 1px #aaa;
+	background: #eee;
+}
+.badge {
+	padding:2px;
+	margin-top: 10px;
+	text-align:center;
+}
+#pphotos {
+	padding: 10px;
 }

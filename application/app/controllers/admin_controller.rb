@@ -37,8 +37,18 @@ class AdminController < ApplicationController
       @photo.forceup = params[:forceup]
       save = @photo.save
       if @photo.status >= 5
+        b = @photo.user.badge
+        unless b.first_photo? == true
+          b.first_photo = true
+          b.save
+          if @photo.user.pref.system_mail?
+            Mail.deliver_newbadge(@photo.user, 'You got a badge for your first photo being approved.') unless @photo.user.bouncing?
+          end
+        end
         @photo.user.add_points(User::POINTS_PHOTO_APPROVED)
-        Mail.deliver_photo_approved(@photo) unless @photo.user.bouncing?
+        if @photo.user.pref.system_mail?
+          Mail.deliver_photo_approved(@photo) unless @photo.user.bouncing?
+        end
       else
         @photo.user.rm_points(User::POINTS_PHOTO_REJECTED)
       end

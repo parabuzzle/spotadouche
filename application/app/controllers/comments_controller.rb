@@ -11,8 +11,19 @@ class CommentsController < ApplicationController
       unless session[:user].nil?
         c.user_id = session[:user]
         c.save
-        User.find(session[:user]).add_points(User::POINTS_COMMENT)
-        Mail.deliver_new_comment(@photo) unless @photo.user.bouncing?
+        @user = User.find(session[:user])
+        b = @user.badge
+        unless b.comment? == true
+          b.comment = true
+          b.save
+          if @user.pref.system_mail?
+            Mail.deliver_newbadge(@user, 'You got a badge for commenting on your first douche.') unless @user.bouncing?
+          end
+        end
+        @user.add_points(User::POINTS_COMMENT)
+        if @photo.user.pref.comments_mail?
+          Mail.deliver_new_comment(@photo) unless @photo.user.bouncing?
+        end
       end
       redirect_to :action => "show", :controller => 'photos', :id => params[:photoid]
     end

@@ -1,4 +1,4 @@
-Hello <%=@login%>,
+Hello <%=@user.login%>,
 
 	This is a notification to let you know that there has been a new comment added to the photo <a href='http://<%=@host%>/photo/<%=@photo.id%>#comments'><%=@photo.title%></a>
 	
@@ -7,3 +7,8 @@ Hello <%=@login%>,
 	
 ---	
 <%=@footer['plain']%>
+
+	This email has been sent to <%=@user.email%>
+	You are receiving this email because you have chosen to receive it. 
+	if you would like to prevent this mail in the future you can control your email preferences here:
+	http://spotadouche.com/emailprefs

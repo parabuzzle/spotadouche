@@ -1,23 +1,88 @@
-<h1>User Dashboard <span class="medium"<%=link_to "Edit my settings", :action => 'edit', :id => @user.id%></span></h1>
+<h1>User Dashboard <span class="small"><%=link_to "View Profile", :action=>"profile", :login => @user.login%></span></h1>
 
-<div class="coitop"></div>
-<%if @user.pref.about.nil? || @user.pref.about.empty?%>
-	<div class="coimid">I have nothing to say...</div>
-<%else%>
-	<div class="coimid"><%=h @user.pref.about%></div>
-<%end%>
-<div class="coibot"></div>
-<div id="dashavatar"><%=image_tag 'http://www.gravatar.com/avatar/'+Digest::MD5.hexdigest(@user.email)+'?s=150'%>
-	<div class="small">avatar provided by <a href="http://gravatar.com">gravatar</a></div>
+<div class="profleft">
+	<div id="dashavatar"><%if @user.avatar.nil? then %><%=link_to(image_tag("defava.png"), {:action => 'avatar'}, :rel => 'facebox')%> <%else%> <%=link_to(image_tag(@user.avatar.public_filename(:thumb), :alt => @user.login), {:action => 'avatar'}, :rel => 'facebox')%><%end%>
+		<div class="small"><%=link_to("Change your Avatar", {:action => 'avatar'}, :rel => 'facebox')%></div>
+		
+	</div>
 </div>
+<div class="profright">
+	<div class="aboxtop"></div>
+	<div class="abox">
+		<div class="profabout">
+			<%if @user.pref.about.nil? || @user.pref.about.empty?%>I have nothing to say...
+			<%else%>
+			<%=h @user.pref.about%>
+			<%end%>
+			<span class="small"<%=link_to "Edit", :action => 'edit', :id => @user.id%></span>
+		</div>
+	</div>
+<div class="aboxbottom"></div>
 <br/>
 
-<div class="item">Username: <%=h @user.login%></div>
-<div class="item">Your Email: <%=h @user.email%> <span class="small">(don't worry we never share this)</span></div>
-<div class="item"><%=link_to "Change your Password", :action=>"reset_password"%></div>
-<!--<div class="item">Your secret submission email address: <%=h @prefs.submission_email%>@submit.spotadouche.com (<%=link_to 'generate new email', {:action => 'submit_email_gen'}, :confirm => 'This will change your submission email address and cannot be reversed. Are you sure you want to do this?', :method => 'post'%>)</div>
-<div class="item">Automatically set my new uploads as annoymous: <%=@prefs.default_annonimize%></div> -->
+</div>
+<div class="clear"></div>
+
+<div class="profleft">
+	<div id="badges">
+		<div class="badgehead">User Badges <span class="small">[<a href="#ubadge" rel="facebox">?</a>]</span></div>
+		<div class="badge">
+		<%for badge in @badges%>
+			<%=image_tag(badge)%>
+		<%end%>
+		</div>
+	</div>
+</div>
+<div class="profright">
+<div id="userstats">
+	<div class="item">Email: <%=@user.email%> <span class="small"<%=link_to "Edit", :action => 'edit', :id => @user.id%></span></div>
+	<div class="h3">User Stats</div>
+	<div class="item"><span class="small">[<a href="#fscore" rel="facebox">?</a>]</span> Points: <%=@user.score%></div>
+	<div class="item"><span class="small">[<a href="#fphotos" rel="facebox">?</a>]</span> Photos: <%=@photos.length%></div>
+</div>
+</div>
+
+<div class="clear"></div>
 <br/>
-<div class="item">You have uploaded <%=@user.photos.count%> total photo(s) including anonymous photos</div>
-<div class="item">Photos Approved: <%=@live.length%></div>
-<div class="item"><%=link_to "Upload a Douche Photo", :controller => 'photos', :action => 'new'%></div>
+<h2>Email Prefs <span class="medium"<%=link_to "Edit", :action => 'emailprefs'%></span></h2>
+<div class="item">
+	<% if @prefs.system_mail%>
+		System Mail - Yes
+	<%else%>
+		System Mail - No
+	<%end%>
+</div>
+<div class="item">
+	<% if @prefs.comments_mail%>
+		Comment Notification - Yes
+	<%else%>
+		Comment Notification - No
+	<%end%>
+</div>
+<div class="item">
+	<% if @prefs.updates_mail%>
+		Update Mail - Yes
+	<%else%>
+		Update Mail - No
+	<%end%>
+</div>
+
+<div id="fscore" style='display:none;'><h2>Points</h2>Points are accumulated by using site features. The more you submit photos, comment, rate, etc.. the more points you will earn. Points earn you site badges, more features, and even merchandise.</div>
+
+<div id="fphotos" style="display:none;">This is the total number of photos that this user has submitted that have been approved by the site admins. This includes anonymous photos</div>
+
+<div id="ubadge" style="display:none;">
+	User's earn badges for doing things on the site and achieving specific point levels
+	<br/>
+	<br/>
+	<%=image_tag('avatar_badge.png')%> - Uploaded a custom avatar<br/>
+	<%=image_tag('rated_badge.png')%> - Rated a photo on the site<br/>
+	<!-- <%=image_tag('dond_badge.png')%> - Played "Douche or Not a Douche"<br/>
+	<%=image_tag('survey_badge.png')%> - Taken the "Are you a Douche" survey<br/> -->
+	<%=image_tag('first_photo_badge.png')%> - A submitted photo has been approved<br/>
+	<!-- <%=image_tag('iphone_badge.png')%> - Installed the Spot a Douche iphone app<br/>
+	<%=image_tag('facebook_badge.png')%> - Linked their facebook account<br/> -->
+	<%=image_tag('comment_badge.png')%> - Commented on a photo<br/>
+	<%=image_tag('profile_badge.png')%> - Completed their profile<br/>
+
+</div>

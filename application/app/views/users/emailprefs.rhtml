@@ -1,0 +1,30 @@
+<h1>My Email Preferences</h1>
+
+
+<%= error_messages_for :pref %>
+
+	<table width="100%">
+		<% form_for :pref do |p|%>
+			<tr>
+				<td valign="top" colspan="2"><%= p.check_box :system_mail %> System Mail [<a href="#sysmail" rel="facebox">?</a>]</td>
+			</tr>
+			<tr>
+				<td valign="top" colspan="2"><%= p.check_box :comments_mail %> Comments Mail [<a href="#commail" rel="facebox">?</a>]</td>
+			</tr>
+			<tr>
+				<td valign="top" colspan="2"><%= p.check_box :updates_mail %> Updates Mail [<a href="#upmail" rel="facebox">?</a>]</td>
+			</tr>
+			<tr>
+			<!--	<td valign="top" colspan="2"><%= p.check_box :daily_douche %> I would like to receive the Daily Douche News [<%=link_to "?", {:action => 'dailydouche', :controller => 'site'}, :rel => "facebox"%>]</td>
+			</tr> -->
+			<tr>
+				<td colspan="2"><%= submit_tag 'Save', :class => 'submit' %></td>
+				<td></td>
+			</tr>
+		<%end%>
+	</table>
+	<%=link_to "Back to Account", :action => "index"%>
+	
+<div id="sysmail" style="display:none;"><h2>System Mails</h2>System mails are emails related to system changes like notifications of photo approval. <br/><br/>You generally want to keep this enabled.</div>
+<div id="commail" style="display:none;"><h2>Comments Mail</h2>When this is enabled you will receive an email to notify you that there is a new comment on a photo that you submitted with a link to the comment.</div>
+<div id="upmail" style="display:none;"><h2>Updates Mail</h2>When this is enabled you will occasionally receive emails from us to let you know about new features, contests, and giveaways.</div>

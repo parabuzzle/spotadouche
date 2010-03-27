@@ -4,11 +4,11 @@
 	<head>
 		<title>New Comment</title>
 	</head>
-	<body>
+	<body bgcolor="#700000">
 		<div id="back" style="background:#700000; padding:10px">
 			<div id="main" style="font-size:20px; background:#ffffff; padding:6px; border:1px solid #333">
 		
-				<div id="start" style="font-weight:bold;">Hello <%=@login%>,</div>
+				<div id="start" style="font-weight:bold;">Hello <%=@user.login%>,</div>
 					<div id="body" style="padding:16px;">
 		
 						This is a notification to let you know that there has been a new comment added to the photo <a href='http://<%=@host%>/photo/<%=@photo.id%>#comments'><%=@photo.title%></a>
@@ -19,6 +19,12 @@
 					<div id="tag" style="font-size:14px; font-weight:bold;"><a style="text-decoration:none;"href="http://spotadouche.com">spotadouche.com</a></div>
 					<div id="footer" style="border-top:2px solid #333; font-size:14px; padding-left: 10px; padding-top:2px;">
 						<%=@footer['html']%>
+					</div>
+					<div id="optout" style="font-size:10px; color:#333333; font-weight:bold; padding:10px;">
+						This email has been sent to <%=@user.email%><br/>
+						You are receiving this email because you have chosen to receive it. 
+						<br/>If you would like to prevent this mail in the future you can control your email preferences here:<br/>
+						<a href="http://spotadouche.com/emailprefs">http://spotadouche.com/emailprefs</a>
 					</div>
 		
 			</div>

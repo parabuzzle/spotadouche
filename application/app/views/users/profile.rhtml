@@ -1,16 +1,65 @@
 <h1><%=h @user.login%>'s Profile</h1>
-<div class="coitop"></div>
-<%if @user.pref.about.nil? || @user.pref.about.empty?%>
-	<div class="coimid">I have nothing to say...</div>
-<%else%>
-	<div class="coimid"><%=h @user.pref.about%></div>
-<%end%>
-<div class="coibot"></div>
-<div id="dashavatar"><%=image_tag 'http://www.gravatar.com/avatar/'+Digest::MD5.hexdigest(@user.email)+'?s=150'%>
-	<div class="small">avatar provided by <a href="http://gravatar.com">gravatar</a></div>
+
+<div class="profleft">
+	<div id="dashavatar"><%if @user.avatar.nil? then %><%=image_tag("defava.png")%> <%else%><a href="<%=@user.avatar.public_filename%>" rel="facebox"><%=image_tag(@user.avatar.public_filename(:thumb), :alt => @user.login)%></a><%end%>
+	</div>
 </div>
+<div class="profright">
+	<div class="aboxtop"></div>
+	<div class="abox">
+		<div class="profabout">
+			<%if @user.pref.about.nil? || @user.pref.about.empty?%>I have nothing to say...
+			<%else%>
+			<%=h @user.pref.about%>
+			<%end%>
+		</div>
+	</div>
+<div class="aboxbottom"></div>
+</div>
+<div class="clear"></div>
+
+<div class="profleft">
+	<div id="badges">
+		<div class="badgehead">User Badges <span class="small">[<a href="#ubadge" rel="facebox">?</a>]</span></div>
+		<div class="badge">
+		<%for badge in @badges%>
+			<%=image_tag(badge)%>
+		<%end%>
+		</div>
+	</div>
+</div>
+<div class="profright">
 <div id="userstats">
 	<div class="h3">User Stats</div>
-	<div class="item">Photos Uploaded: <%=@photos.length%></div>
-	<div class="item">Photos Approved: <%=@live.length%></div>
+	<div class="item"><span class="small">[<a href="#fscore" rel="facebox">?</a>]</span> Points: <%=@user.score%></div>
+	<div class="item"><span class="small">[<a href="#fphotos" rel="facebox">?</a>]</span> Photos: <%=@photos.length%></div>
+</div>
+</div>
+
+<div class="clear"></div>
+<div id="uphotos">Public Photos Uploaded by this User</div>
+<div id="pphotos">
+	<% for photo in @prev%>
+	<%=link_to image_tag(photo.public_filename(:small), :height => "180px"), :action => 'show', :controller => 'photos', :id => photo.id%>
+	<%end%>
+</div>
+
+<div id="fscore" style='display:none;'><h2>Points</h2>Points are accumulated by using site features. The more you submit photos, comment, rate, etc.. the more points you will earn. Points earn you site badges, more features, and even merchandise.</div>
+
+<div id="fphotos" style="display:none;">This is the total number of photos that this user has submitted that have been approved by the site admins. This includes anonymous photos</div>
+
+<div id="ubadge" style="display:none;">
+	User's earn badges for doing things on the site and achieving specific point levels
+	<br/>
+	<br/>
+	<%=image_tag('avatar_badge.png')%> - Uploaded a custom avatar<br/>
+	<%=image_tag('rated_badge.png')%> - Rated a photo on the site<br/>
+	<!-- <%=image_tag('dond_badge.png')%> - Played "Douche or Not a Douche"<br/>
+	<%=image_tag('survey_badge.png')%> - Taken the "Are you a Douche" survey<br/> -->
+	<%=image_tag('first_photo_badge.png')%> - A submitted photo has been approved<br/>
+	<!-- <%=image_tag('iphone_badge.png')%> - Installed the Spot a Douche iphone app<br/>
+	<%=image_tag('facebook_badge.png')%> - Linked their facebook account<br/> -->
+	<%=image_tag('comment_badge.png')%> - Commented on a photo<br/>
+	<%=image_tag('profile_badge.png')%> - Completed their profile<br/>
+
 </div>

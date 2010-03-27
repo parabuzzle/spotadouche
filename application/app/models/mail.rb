@@ -7,7 +7,7 @@ class Mail < ActionMailer::Base
     subject "Welcome Fellow Douche Spotter"
     from @@mail['from']
     content_type "text/html"
-    body :login => user.login, :footer => @@mail['footer']
+    body :login => user.login, :footer => @@mail['footer'], :user => user
   end
   
   def newuser(user)
@@ -23,7 +23,7 @@ class Mail < ActionMailer::Base
     subject "Photo Approved"
     from @@mail['from']
     content_type "text/html"
-    body :photo => photo, :footer => @@mail['footer'], :host => @@mail['host']
+    body :photo => photo, :footer => @@mail['footer'], :host => @@mail['host'], :user => photo.user
   end
   
   def newphoto(photo, user, host="spotadouche.com")
@@ -68,6 +68,14 @@ class Mail < ActionMailer::Base
     from @@mail['from']
     content_type "text/html"
     body :user => user, :footer => @@mail['footer']
+  end
+  
+  def newbadge(user, msg)
+    recipients user.email
+    subject "New badge earned"
+    from @@mail['from']
+    content_type "text/html"
+    body :user => user, :footer => @@mail['footer'], :msg => msg
   end
   
 end

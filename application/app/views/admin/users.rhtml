@@ -2,7 +2,7 @@
 
 <%for user in @users%>
 	<div class="streamitem">
-		<div class="avatar"><%=image_tag 'http://www.gravatar.com/avatar/'+Digest::MD5.hexdigest(user.email)+'?s=80'%></div>
+		<div class="avatar"><%=image_tag(user.avatar.public_filename(:thumb), :alt => user.login)%></div>
 		<div class="username"><%=user.login%></div>
 		<div class="email"><%=user.email%></div>
 		<span class="medium"<%=link_to "Edit", :action => 'edit', :controller => "users", :id => user.id%></span>

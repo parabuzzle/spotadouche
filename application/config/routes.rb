@@ -53,6 +53,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'about', :controller => 'site', :action => 'about'
   map.connect 'terms', :controller => 'site', :action => 'terms'
   map.connect 'privacy', :controller => 'site', :action => 'privacy'
+  map.connect 'emailprefs', :controller => "users", :action => 'emailprefs'
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
   map.connect '*path', :controller => 'site', :action => 'render_404'

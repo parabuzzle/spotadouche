@@ -1,4 +1,4 @@
-
+<% unless @photo.status < 5%>
 <div class="streamitem">
 	<div class="date"><!-- Uploaded <%=reldate @photo.created_at%>--> <%=@photo.created_at.to_s(:pretty)%></div>
 	<div class="rating">
@@ -55,3 +55,6 @@
 	</div>
 	<%end%>
 </div>
+<%else%>
+<h1>I'm sorry, This photo doesn't exist</h1>
+<%end%>

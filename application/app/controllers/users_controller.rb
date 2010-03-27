@@ -1,12 +1,14 @@
 class UsersController < ApplicationController
   before_filter :protect_sensitive, :only => [:edit]
-  before_filter :protect, :only =>[:index, :edit]
+  before_filter :protect, :only =>[:index, :edit, :emailprefs, :avatar, :create_avatar]
   # say something nice, you goof!  something sweet.
   def index
     @title="Spot a Douche - User Dashboard"
     @user = User.find(session[:user])
     @prefs = @user.pref
-    @live = Photo.find(:all, :conditions => "user_id = #{@user.id} and status >= 5")
+    @photos = Photo.find(:all, :conditions => "user_id = #{@user.id} and status >= 5")
+    @badges = @user.badge.all
+    
     if @prefs.about.nil? || @prefs.about.empty?
       if flash[:notice].nil? 
         flash[:notice] = "You don't have any \"about me information\"<br/> <a href='/user/edit/#{@user.id}'>Click here</a> to add something now!</a>"
@@ -14,12 +16,46 @@ class UsersController < ApplicationController
     end
     redirect_to(:action => 'signup') unless logged_in? || User.count > 0
   end
+  
+  def avatar
+    @title = "Spot a Douche - Add Avatar"
+    @user = User.find(session[:user])
+    if params[:facebox] == 'true'
+      render :template => false
+    end
+  end
+  
+  def create_avatar
+    @user = User.find(session[:user])
+    if @user.avatar.nil?
+      @attachable_file = @user.build_avatar(params[:avatar])
+    else
+      @attachable_file = @user.avatar(params[:avatar])
+    end
+    if @attachable_file.save
+      b = @user.badge
+      unless b.avatar? == true
+        b.avatar = true
+        b.save
+        @user.add_points(User::POINTS_AVATAR)
+        if @user.pref.system_mail?
+          Mail.deliver_newbadge(@user, 'You got a badge for uploading a custom avatar') unless @user.bouncing?
+        end
+      end
+      flash[:notice] = 'Avatar was successfully created.'
+      redirect_to :action => "index"     
+    else
+      render :action => :avatar
+    end
+  end
+  
 
   def profile
     @user = User.find_by_login(params[:login])
-    @photos = Photo.find(:all, :conditions => "user_id = #{@user.id}")
-    @live = Photo.find(:all, :conditions => "user_id = #{@user.id} and status >= 5")
+    @photos = Photo.find(:all, :conditions => "user_id = #{@user.id} and status >= 5")
+    @prev = Photo.find(:all, :conditions => "user_id = #{@user.id} and status >= 5 and anony is not true")
     @title="Spot a Douche - #{@user.login}'s Profile"
+    @badges = @user.badge.all
   end
 
 
@@ -60,6 +96,7 @@ class UsersController < ApplicationController
     @user = User.find(id)
     @pref = @user.pref
     return unless request.post?
+    profcomp = true unless params[:pref][:about].nil? 
     unless params[:user][:email].nil? then; if params[:user][:email] != @user.email then oldemail = @user.email end; end
     return unless @user.update_attributes(params[:user])
     return unless @pref.update_attributes(params[:pref])
@@ -68,6 +105,16 @@ class UsersController < ApplicationController
       @user.bouncing = false
       @user.save
       Mail.deliver_emailchange(@user, oldemail) 
+    end
+    if profcomp != nil
+      b = @user.badge
+      unless b.profile? == true
+        b.profile = true
+        b.save
+        if @user.pref.system_mail?
+          Mail.deliver_newbadge(@user, 'You got a badge for completing your profile') unless @user.bouncing?
+        end
+      end
     end
     redirect_back_or_default(:controller => '/users', :action => 'index')
     flash[:notice] = "Updated User Settings"
@@ -131,6 +178,17 @@ class UsersController < ApplicationController
     logger.error "Invalid Reset Token entered" 
     flash[:notice] = "Sorry - That is an invalid password reset code. Please check your code and try again." 
     redirect_back_or_default(:controller => '/account', :action => 'index')
+  end
+  
+  def emailprefs
+    @title = "Spot a Douche - Email Prefs"
+    @user = User.find(session[:user])
+    @pref = @user.pref
+    if request.post?
+      if @pref.update_attributes(params[:pref])
+        flash[:notice] = "Settings updated"
+      end
+    end
   end
   
   private 

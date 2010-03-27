@@ -1,0 +1,18 @@
+<h1>Upload an Avatar</h1>
+
+<%= error_messages_for :avatar %>
+<div id="form">
+<% form_for(:avatar, :url => {:action => 'create_avatar'}, :html => { :multipart => true }) do |f| %>
+<table width="100%">
+  	<tr>
+		<td>Image: </td>
+		<td><%= f.file_field :uploaded_data %></td>
+	</tr>
+	<tr>
+		<td colspan="2"><%= submit_tag 'Upload', :class => 'submit' %></td>
+		<td></td>
+	</tr>
+</table>
+<% end %>
+
+</div>
