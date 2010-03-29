@@ -1,0 +1,40 @@
+<div id="dond">
+		<% if params[:last].nil?%>
+				<h1 style="font-size:46px;font-weight:bold;padding:8px;">Douche or Not a Douche?</h1>
+				<div id="votebuttons" style="margin:10px;">
+					<span id="upbutton"><%=link_to(image_tag('douche-button.png'), {:last => @photo.id, :vote =>'up', :action=>"dond"}, :method => :post)%></span> <span id="downbutton"><%=link_to(image_tag('not-button.png'), {:last => @photo.id, :vote =>'down',:action => "dond"}, :method => :post)%></span>
+				</div>
+				<%= image_tag(@photo.public_filename) %>
+				<div class="link">
+					Like it? Share this Game with your friends
+					<div class="share">
+						<a href="http://www.facebook.com/sharer.php?u=http://<%=request.host %>/games/dond&t=Douche or Not a Douche Game" target="blank"><img src="/images/fb.jpg" border="0px" alt="facebook"/></a> 
+						<a href="http://twitter.com/home?status=http://<%=request.host %>/games/dond" target="blank"><img src="/images/tweet.jpg" border="0px" alt="twitter"/></a> 
+					</div>
+				</div>
+		<%else%>
+				<h1 style="font-size:46px;font-weight:bold;padding:8px;">Douche or Not a Douche?</h1>
+				<div id="nest1" style="width:350px;margin:auto;">
+					<div id="thumb" style="float:left;">
+						<img src='<%= image_path(SITE_PROPS['facebook']['basehost'] + @last.public_filename(:thumb)) %>'/>
+					</div>
+					<div id="ratings" style="float:left;text-align:left;margin-left:10px">
+						
+						<div class="item">Douche: <%=number_with_precision(@last.votesup_percent, :precision => 2)%>%</div>
+						<div class="item">Not a Douche: <%=number_with_precision(@last.votesdown_percent, :precision => 2)%>%</div>
+						<div class="item">Total Votes: <%=@last.votes_total%></div>
+					</div>
+					<div class="clear" style="clear:both;"></div>
+					<div id="next" style="padding:10px;">
+						<%=link_to(image_tag("next-button.png"), :action=>'dond')%>
+					</div>
+				</div>
+				<div class="link">
+					Share this results page
+					<div class="share">
+						<a href="http://www.facebook.com/sharer.php?u=http://<%=request.host %>/games/dond?last=<%=@last.id%>&t=Douche or Not a Douche Game" target="blank"><img src="/images/fb.jpg" border="0px" alt="facebook"/></a> 
+						<a href="http://twitter.com/home?status=http://<%=request.host %>/games/dond?last=<%=@last.id%>" target="blank"><img src="/images/tweet.jpg" border="0px" alt="twitter"/></a> 
+					</div>
+				</div>
+		<%end%>
+</div>

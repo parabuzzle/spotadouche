@@ -7,9 +7,8 @@
 	<link rel="icon" href="/favicon.ico" type="image/x-icon">
 	<%= auto_discovery_link_tag(:rss, {:action => "feed", :controller => "photos"}, {:title => "Photo Feed"}) %>
 	<%= stylesheet_link_tag "app" %>
-    <%= stylesheet_link_tag "stars" %>
 	<%= stylesheet_link_tag "admin" %>
-	<%= stylesheet_link_tag "content" %>
+	<%= stylesheet_link_tag "games" %>
 	<%= stylesheet_link_tag "facebox" %>
 	<%= javascript_include_tag 'widget'%>
 	<%= javascript_include_tag 'http://static.ak.connect.facebook.com/connect.php/en_US'%>
@@ -65,19 +64,6 @@
 			
 			<%= @content_for_layout %>
 		</div><!-- content -->
-		<div id="contentright">
-			<!-- <div class="right"><fb:login-button v="2" size="medium" onlogin="window.location.reload(true);">Login with Facebook</fb:login-button></div>
-			<br/> -->
-			<div id="search">
-				<%form_for :search, :url => { :action => "index", :controller => "search" } do |f|%>
-					<%=f.text_field :q, :class=>'searchbox', :size => '15', :value => params[:query]%>
-					<%= submit_tag 'Search', :class => 'searchbutton' %>
-				<%end%>
-			</div>
-			<div id="rightbox">
-				<%= render :partial => 'site/sidebar'%>
-			</div>
-		</div><!-- contentright -->
 		<div class="clear"></div>
 		<div id="paginate">
 			<%=unless @paginate.nil? then will_paginate @paginate end%>
